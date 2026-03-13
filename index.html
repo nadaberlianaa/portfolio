@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nada Fitria Berliana | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #080811; 
+            --glow-primary: rgba(125, 95, 255, 0.18); 
+            --glow-secondary: rgba(69, 170, 242, 0.12); 
+            --card-bg: rgba(17, 17, 29, 0.6);
+            --text-main: #ffffff;
+            --text-dim: #a0a0b0;
+            --accent-primary: #7d5fff;
+            --accent-secondary: #45aaf2;
+            --nav-bg: rgba(8, 8, 17, 0.7);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --gradient: linear-gradient(135deg, #7d5fff 0%, #45aaf2 100%);
+        }
+
+        .light-mode {
+            --bg-color: #f5f5f7;
+            --glow-primary: rgba(125, 95, 255, 0.08);
+            --glow-secondary: rgba(69, 170, 242, 0.05);
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --text-main: #1d1d1f;
+            --text-dim: #6e6e73;
+            --accent-primary: #5e35b1;
+            --accent-secondary: #0071e3;
+            --nav-bg: rgba(245, 245, 247, 0.8);
+            --border-color: rgba(0, 0, 0, 0.1);
+            --gradient: linear-gradient(135deg, #5e35b1 0%, #0071e3 100%);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 70px; 
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); overflow-x: hidden; transition: 0.4s; }
+        
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 85% 15%, var(--glow-primary), transparent 45%),
+                        radial-gradient(circle at 15% 85%, var(--glow-secondary), transparent 45%);
+            z-index: -1; pointer-events: none;
+        }
+
+        nav {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 1150px;
+            background: var(--nav-bg); backdrop-filter: blur(15px); padding: 12px 30px; border-radius: 50px;
+            display: flex; justify-content: space-between; align-items: center; z-index: 1000; border: 1px solid var(--border-color);
+        }
+        .logo { font-weight: 800; font-size: 1.2rem; }
+        nav ul { display: flex; list-style: none; gap: 20px; align-items: center; }
+        nav ul li a { text-decoration: none; color: var(--text-main); font-size: 0.85rem; font-weight: 600; opacity: 0.7; transition: 0.3s; }
+        nav ul li a:hover { opacity: 1; color: var(--accent-primary); }
+        #theme-toggle { background: var(--gradient); border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; color: white; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+
+        section { padding: 60px 10%; }
+        .section-title { font-size: 2.5rem; margin-bottom: 30px; font-weight: 800; letter-spacing: -1px; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* --- HERO --- */
+        .hero { height: 100vh; display: flex; align-items: center; justify-content: space-around; }
+        .hero-content { max-width: 600px; }
+        .badge { background: rgba(125, 95, 255, 0.12); color: var(--accent-primary); padding: 7px 18px; border-radius: 25px; font-size: 0.8rem; font-weight: 700; margin-bottom: 25px; display: inline-block; border: 1px solid rgba(125, 95, 255, 0.2); }
+        .hero h1 { font-size: 3.8rem; line-height: 1.1; margin-bottom: 20px; font-weight: 800; letter-spacing: -2px; }
+        .highlight { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { color: var(--text-dim); font-size: 1.2rem; margin-bottom: 40px; line-height: 1.6; }
+        .btn-container { display: flex; gap: 15px; }
+        .btn-primary, .btn-secondary { padding: 14px 32px; border-radius: 40px; text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: 0.4s; display: inline-block; border: none; }
+        .btn-primary { background: var(--gradient); color: white; cursor: pointer; }
+        .btn-primary:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(125, 95, 255, 0.4); }
+        .btn-secondary { border: 2px solid var(--border-color); color: var(--text-main); }
+        .btn-secondary:hover { border-color: var(--accent-primary); transform: translateY(-8px); }
+
+        .hero-image .image-card { width: 330px; height: 420px; background: var(--card-bg); border-radius: 40px; border: 1px solid var(--border-color); transform: rotate(4deg); overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.5); transition: 0.6s ease; }
+        .hero-image:hover .image-card { transform: rotate(0deg) scale(1.05); }
+        .hero-image img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* --- ABOUT, STATS & TOOLS --- */
+        #about { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; }
+        .about-container { display: flex; gap: 50px; align-items: center; }
+        .about-text { flex: 1; }
+        .about-content { color: var(--text-dim); font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px; }
+        
+        .tools-logo-container { display: flex; gap: 20px; margin: 25px 0; align-items: center; flex-wrap: wrap; }
+        .tool-icon { width: 40px; height: 40px; object-fit: contain; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2)); cursor: pointer; }
+        .tool-icon:hover { transform: translateY(-8px) scale(1.15); filter: drop-shadow(0 8px 12px rgba(125, 95, 255, 0.4)); }
+
+        .stats-grid { display: flex; gap: 15px; margin-top: 30px; }
+        .stat-card { background: var(--card-bg); padding: 20px; border-radius: 20px; border: 1px solid var(--border-color); flex: 1; min-height: 140px; text-align: center; transition: 0.4s; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .stat-card:hover { transform: translateY(-10px); border-color: var(--accent-primary); box-shadow: 0 10px 25px rgba(125, 95, 255, 0.2); }
+        .stat-card i { font-size: 1.5rem; color: var(--accent-secondary); margin-bottom: 12px; }
+        .stat-card h3 { font-size: 0.9rem; color: var(--accent-primary); font-weight: 800; margin-bottom: 5px; }
+        .stat-card p { font-size: 0.75rem; color: var(--text-dim); }
+
+        .about-image-wrapper { position: relative; width: 350px; height: 410px; flex-shrink: 0; }
+        .about-frame { position: absolute; top: 15px; left: 15px; width: 100%; height: 100%; border: 2px solid var(--accent-primary); border-radius: 30px; z-index: 1; }
+        .about-photo { position: relative; width: 100%; height: 100%; border-radius: 30px; overflow: hidden; z-index: 2; border: 1px solid var(--border-color); }
+        .about-photo img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .about-photo:hover img { transform: scale(1.1); }
+
+        /* --- PROJECTS & ACHIEVEMENTS --- */
+        .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        .project-card { background: var(--card-bg); border-radius: 30px; overflow: hidden; border: 1px solid var(--border-color); transition: 0.5s; display: flex; flex-direction: column; }
+        .project-card:hover { transform: translateY(-10px); border-color: var(--accent-primary); box-shadow: 0 15px 30px rgba(125, 95, 255, 0.15); }
+        
+        .proj-img { height: 180px; width: 100%; background: rgba(28, 28, 42, 0.5); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--accent-primary); position: relative; overflow: hidden; }
+        .proj-img i { opacity: 0.6; transition: 0.5s; }
+        .proj-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .project-card:hover .proj-img img { transform: scale(1.1); }
+        .project-card:hover .proj-img i { transform: scale(1.1); opacity: 1; }
+        
+        .proj-info { padding: 25px; flex: 1; display: flex; flex-direction: column; }
+        .tag { color: var(--accent-secondary); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 10px; }
+
+        .achievement-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        .achievement-card { background: var(--card-bg); padding: 25px; border-radius: 25px; border: 1px solid var(--border-color); transition: 0.4s; position: relative; overflow: hidden; }
+        .achievement-card:hover { transform: translateY(-8px); border-color: var(--accent-primary); }
+        .achievement-card i.watermark { position: absolute; right: -15px; bottom: -15px; font-size: 6rem; opacity: 0.07; color: var(--text-main); }
+        .achieve-title { color: var(--accent-primary); font-weight: 800; font-size: 1.1rem; margin-bottom: 5px; display: flex; align-items: center; gap: 12px; }
+        .achieve-org { color: var(--text-main); font-weight: 600; font-size: 0.9rem; margin-bottom: 15px; opacity: 0.8; }
+        .achieve-list { list-style: none; padding-left: 0; }
+        .achieve-list li { position: relative; padding-left: 20px; color: var(--text-dim); font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
+        .achieve-list li::before { content: '▹'; position: absolute; left: 0; color: var(--accent-secondary); }
+
+        /* --- EXPERIENCE --- */
+        .timeline { border-left: 2px solid var(--border-color); padding-left: 40px; }
+        .timeline-item { position: relative; margin-bottom: 40px; }
+        .timeline-item::before { content: ''; position: absolute; left: -51px; top: 5px; width: 18px; height: 18px; background: var(--accent-primary); border-radius: 50%; border: 3px solid var(--bg-color); }
+        .timeline-date { color: var(--accent-secondary); font-weight: 700; font-size: 0.9rem; margin-bottom: 5px; }
+
+        /* --- NEW EDITORIAL CONTACT STYLE --- */
+        .contact-box { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 40px; padding: 60px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 30px; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2); backdrop-filter: blur(15px); margin-top: 20px; text-align: center; }
+        .contact-box::before { content: ''; position: absolute; top: -50px; left: -50px; width: 250px; height: 250px; background: var(--glow-primary); filter: blur(60px); border-radius: 50%; pointer-events: none; z-index: 0; }
+        .contact-content { z-index: 1; max-width: 700px; }
+        .social-links-container { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 20px; z-index: 1; }
+        
+        .social-link-editorial { color: var(--text-main); text-decoration: none; display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 1.05rem; padding: 12px 25px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 30px; transition: 0.3s; }
+        .social-link-editorial:hover { background: rgba(125, 95, 255, 0.15); border-color: var(--accent-primary); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(125, 95, 255, 0.2); }
+        .social-link-editorial i { color: var(--accent-secondary); font-size: 1.2rem; }
+
+        footer { text-align: center; padding: 30px 20px; border-top: 1px solid var(--border-color); color: var(--text-dim); font-size: 0.9rem; margin-top: 50px; }
+
+        @media (max-width: 992px) { 
+            .about-container { flex-direction: column; text-align: center; } 
+            .stats-grid { flex-direction: column; } 
+            .hero-image { display: none; } 
+            .tools-logo-container { justify-content: center; } 
+            .contact-box { padding: 40px 25px; }
+            .social-links-container { flex-direction: column; width: 100%; align-items: center;}
+            .social-link-editorial { width: 100%; justify-content: center; max-width: 300px;}
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">Nada's Portfolio</div>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#achievements">Achievements</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><button id="theme-toggle"><i class="fas fa-moon"></i></button></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="badge">Electrical Engineering Student</div>
+            <h1>Halo, saya <br><span class="highlight">Nada Fitria Berliana</span></h1>
+            <p>Electrical Engineering Student at UPNVJ Exploring IoT, Research, and Digital Design.</p>
+            <div class="btn-container">
+                <a href="#about" class="btn-primary">About Me</a>
+                <a href="#contact" class="btn-secondary">Connect With Me</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="image-card"><img src="images/nadaa.jpg" alt="Nada Profile"></div>
+        </div>
+    </section>
+
+    <section id="about" class="reveal">
+        <h2 class="section-title">Tentang Saya</h2>
+        <div class="about-container">
+            <div class="about-text">
+                <div class="about-content">
+                    <p>Saya adalah mahasiswa S1 Teknik Elektro peminatan Telekomunikasi di Universitas Pembangunan Nasional “Veteran” Jakarta dengan minat pada pengembangan solusi berbasis teknologi, riset, dan komunikasi publik.</p>
+                    <br>
+                    <p>Aktif sebagai Head of Media & Information Department di KSM Internet of Things, saya berpengalaman dalam penulisan esai kompetitif, presentasi akademik, serta UI prototyping menggunakan Figma.</p>
+                </div>
+                
+                <div class="tools-logo-container">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Figma" class="tool-icon" title="Figma">
+                    <img src="https://img.icons8.com/fluency/48/canva.png" alt="Canva" class="tool-icon" title="Canva">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg" alt="VS Code" class="tool-icon" title="VS Code">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b6/Adobe_Photoshop_Lightroom_CC_logo.svg" alt="Lightroom" class="tool-icon" title="Adobe Lightroom">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" alt="Photoshop" class="tool-icon" title="Adobe Photoshop">
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card"><i class="fas fa-tower-broadcast"></i><h3>Telecommunications</h3><p>Engineering Field</p></div>
+                    <div class="stat-card"><i class="fas fa-microchip"></i><h3>Internet of Things</h3><p>Focus Area</p></div>
+                    <div class="stat-card"><i class="fas fa-users-gear"></i><h3>Media & Information</h3><p>Leadership Role</p></div>
+                </div>
+            </div>
+            <div class="about-image-wrapper">
+                <div class="about-frame"></div>
+                <div class="about-photo"><img src="images/nadaa.jpg" alt="Nada Profile"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="reveal">
+        <h2 class="section-title">Proyek Utama</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <div class="proj-img">
+                    <img src="images/lokasehat.png" alt="LokaSehat">
+                </div>
+                <div class="proj-info">
+                    <span class="tag">IoT & Health</span>
+                    <h3 style="margin-bottom: 10px;">LOKASEHAT</h3>
+                    <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.6;">Konsep aplikasi berbasis IoT dan geospasial untuk pencegahan penyakit menular melalui pemantauan lingkungan.</p>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="proj-img">
+                    <img src="images/essay.png" alt="Academic Integrity">
+                </div>
+                <div class="proj-info">
+                    <span class="tag">Research</span>
+                    <h3 style="margin-bottom: 10px;">Academic Integrity</h3>
+                    <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.6;">Esai ilmiah populer menganalisis tantangan etika integritas akademik di era AI untuk reformasi akademik.</p>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="proj-img">
+                    <img src="images/branding.png" alt="KSM IoT Branding">
+                </div>
+                <div class="proj-info">
+                    <span class="tag">Digital Branding</span>
+                    <h3 style="margin-bottom: 10px;">KSM IoT Branding</h3>
+                    <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.6;">Strategi komunikasi digital dan perancangan identitas visual untuk organisasi kampus.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="achievements" class="reveal">
+        <h2 class="section-title">Achievements</h2>
+        <div class="achievement-grid">
+            <div class="achievement-card">
+                <i class="fas fa-trophy watermark"></i>
+                <div class="achieve-title"><i class="fas fa-award"></i> Juara 1 Lomba Esai Ilmiah Populer</div>
+                <div class="achieve-org">UPN Veteran Jakarta | 2025</div>
+                <ul class="achieve-list">
+                    <li>Judul: Jujur di Ujung Jari? Menavigasi Ujian Etika Akademik di tengah Tsunami Informasi Digital.</li>
+                    <li>Menganalisis isu integritas akademik di era Artificial Intelligence berbasis literatur ilmiah.</li>
+                    <li>Mengusulkan solusi literasi etika digital dan reformasi sistem evaluasi akademik.</li>
+                </ul>
+            </div>
+            <div class="achievement-card">
+                <i class="fas fa-medal watermark"></i>
+                <div class="achieve-title"><i class="fas fa-medal"></i> Juara 2 & Best Presentation LKTI</div>
+                <div class="achieve-org">ELECTROLYMPIC UPNVJ | 2025</div>
+                <ul class="achieve-list">
+                    <li>LOKASEHAT: Aplikasi Pencegahan Penyakit Menular Berbasis IoT dan Pemetaan Geospasial.</li>
+                    <li>Menyusun full paper ilmiah berbasis analisis permasalahan aktual dengan pendekatan sistematis.</li>
+                    <li>Merancang solusi inovatif berbasis teknologi Teknik Elektro.</li>
+                    <li>Meraih penghargaan Best Presentation melalui presentasi hasil penelitian secara argumentatif.</li>
+                </ul>
+            </div>
+            <div class="achievement-card">
+                <i class="fas fa-star watermark"></i>
+                <div class="achieve-title"><i class="fas fa-certificate"></i> Best Staff Outstanding Contribution Award</div>
+                <div class="achieve-org">KSM Internet of Things UPNVJ | 2025</div>
+                <ul class="achieve-list">
+                    <li>Diberikan atas kontribusi aktif, konsistensi kinerja, dan dedikasi penuh dalam mendukung program kerja organisasi.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="reveal">
+        <h2 class="section-title">Experience</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">2026 - Present</div>
+                <h3>Head of Media & Information Department</h3>
+                <p>KSM Internet of Things UPNVJ - Memimpin dua divisi (Public Relations dan Creative Media) dalam merancang strategi komunikasi organisasi, mengelola sistem publikasi, serta mengembangkan branding dan identitas visual organisasi.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2025-2026</div>
+                <h3>Staff of Creative Media Division</h3>
+                <p>KSM Internet of Things UPNVJ - Mengembangkan konten visual untuk media sosial dan publikasi organisasi serta berkontribusi dalam strategi branding digital guna meningkatkan awareness terhadap teknologi Internet of Things.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2024 - 2026</div>
+                <h3>Tutor Akademik</h3>
+                <p>Mengajar materi dasar seperti Rangkaian Listrik, Kimia Dasar, Kalkulus, dan Matematika I kepada mahasiswa serta memfasilitasi sesi diskusi dan tanya jawab untuk memperdalam pemahaman konsep.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2024 - 2025</div>
+                <h3>Master of Ceremony (MC)</h3>
+                <p>Academic & Organizational Events - Membawakan berbagai acara akademik dan organisasi seperti PROPEL KTI, BATAREL, dan EGOTS serta menyusun naskah acara untuk memastikan alur kegiatan berjalan dengan baik.</p>
+            </div>
+             <div class="timeline-item">
+                <div class="timeline-date">2025</div>
+                <h3>Head of HPDD Division</h3>
+                <p>I-VISIT: IoT UPNVJ x IoT Universitas Brawijaya - Memimpin tim dalam perencanaan publikasi, dokumentasi, dan komunikasi eksternal untuk menjaga profesionalitas serta konsistensi identitas visual kegiatan.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="reveal" style="padding-bottom: 20px;">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 5rem; font-weight: 700; margin-bottom: 10px; letter-spacing: -2px;">Thank You.</h2>
+            <div style="background: var(--gradient); color: white; display: inline-block; padding: 8px 25px; font-weight: 700; font-size: 1.1rem; transform: rotate(-2deg); box-shadow: 4px 4px 0px rgba(255, 255, 255, 0.1);">
+                Let's connect & collaborate!
+            </div>
+        </div>
+
+        <div class="contact-box">
+            <div class="contact-content">
+                <p style="color: var(--text-dim); font-size: 1.1rem; line-height: 1.8; margin-bottom: 10px;">
+                    Terima kasih sudah berkunjung! Saya selalu mencari peluang baru untuk menerapkan keahlian saya dalam proyek-proyek inovatif.
+                </p>
+                <p style="font-family: 'Playfair Display', serif; font-size: 1.5rem; font-style: italic; color: var(--text-main); margin-bottom: 30px;">
+                    Mari berdiskusi tentang bagaimana kita bisa bekerja sama.
+                </p>
+            </div>
+            
+            <div class="social-links-container">
+                <a href="mailto:nadaftrberliana@gmail.com" class="social-link-editorial">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+                <a href="https://linkedin.com/in/nadafitriaberliana/" target="_blank" class="social-link-editorial">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+                <a href="https://instagram.com/berlianadaa/" target="_blank" class="social-link-editorial">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+            </div>
+            
+            <div style="margin-top: 40px; z-index: 1;">
+                 <p style="font-family: 'Playfair Display', serif; font-size: 1.2rem; font-style: italic; color: var(--text-dim); margin-bottom: 5px;">Warm regards,</p>
+                 <h3 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--text-main); line-height: 1.2;">Nada Fitria Berliana</h3>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Nada Fitria Berliana. Built with <i class="fas fa-lightbulb" style="color: var(--accent-secondary);"></i> & <i class="fas fa-coffee" style="color: var(--accent-primary);"></i></p>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            themeIcon.classList.toggle('fa-moon');
+            themeIcon.classList.toggle('fa-sun');
+        });
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 80) { reveals[i].classList.add("active"); }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal();
+    </script>
+</body>
+</html>
