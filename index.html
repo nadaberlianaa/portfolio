@@ -36,11 +36,7 @@
             --gradient: linear-gradient(135deg, #5e35b1 0%, #0071e3 100%);
         }
 
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 70px; 
-        }
-
+        html { scroll-behavior: smooth; scroll-padding-top: 70px; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background-color: var(--bg-color); color: var(--text-main); overflow-x: hidden; transition: 0.4s; }
         
@@ -67,7 +63,6 @@
         .reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* --- HERO --- */
         .hero { height: 100vh; display: flex; align-items: center; justify-content: space-around; }
         .hero-content { max-width: 600px; }
         .badge { background: rgba(125, 95, 255, 0.12); color: var(--accent-primary); padding: 7px 18px; border-radius: 25px; font-size: 0.8rem; font-weight: 700; margin-bottom: 25px; display: inline-block; border: 1px solid rgba(125, 95, 255, 0.2); }
@@ -85,7 +80,6 @@
         .hero-image:hover .image-card { transform: rotate(0deg) scale(1.05); }
         .hero-image img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* --- ABOUT, STATS & TOOLS --- */
         #about { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; }
         .about-container { display: flex; gap: 50px; align-items: center; }
         .about-text { flex: 1; }
@@ -108,16 +102,13 @@
         .about-photo img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
         .about-photo:hover img { transform: scale(1.1); }
 
-        /* --- PROJECTS & ACHIEVEMENTS --- */
         .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
         .project-card { background: var(--card-bg); border-radius: 30px; overflow: hidden; border: 1px solid var(--border-color); transition: 0.5s; display: flex; flex-direction: column; }
         .project-card:hover { transform: translateY(-10px); border-color: var(--accent-primary); box-shadow: 0 15px 30px rgba(125, 95, 255, 0.15); }
         
         .proj-img { height: 180px; width: 100%; background: rgba(28, 28, 42, 0.5); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--accent-primary); position: relative; overflow: hidden; }
-        .proj-img i { opacity: 0.6; transition: 0.5s; }
         .proj-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
         .project-card:hover .proj-img img { transform: scale(1.1); }
-        .project-card:hover .proj-img i { transform: scale(1.1); opacity: 1; }
         
         .proj-info { padding: 25px; flex: 1; display: flex; flex-direction: column; }
         .tag { color: var(--accent-secondary); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 10px; }
@@ -132,13 +123,11 @@
         .achieve-list li { position: relative; padding-left: 20px; color: var(--text-dim); font-size: 0.9rem; line-height: 1.6; margin-bottom: 8px; }
         .achieve-list li::before { content: '▹'; position: absolute; left: 0; color: var(--accent-secondary); }
 
-        /* --- EXPERIENCE --- */
         .timeline { border-left: 2px solid var(--border-color); padding-left: 40px; }
         .timeline-item { position: relative; margin-bottom: 40px; }
         .timeline-item::before { content: ''; position: absolute; left: -51px; top: 5px; width: 18px; height: 18px; background: var(--accent-primary); border-radius: 50%; border: 3px solid var(--bg-color); }
         .timeline-date { color: var(--accent-secondary); font-weight: 700; font-size: 0.9rem; margin-bottom: 5px; }
 
-        /* --- NEW EDITORIAL CONTACT STYLE --- */
         .contact-box { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 40px; padding: 60px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 30px; position: relative; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.2); backdrop-filter: blur(15px); margin-top: 20px; text-align: center; }
         .contact-box::before { content: ''; position: absolute; top: -50px; left: -50px; width: 250px; height: 250px; background: var(--glow-primary); filter: blur(60px); border-radius: 50%; pointer-events: none; z-index: 0; }
         .contact-content { z-index: 1; max-width: 700px; }
@@ -150,12 +139,46 @@
 
         footer { text-align: center; padding: 30px 20px; border-top: 1px solid var(--border-color); color: var(--text-dim); font-size: 0.9rem; margin-top: 50px; }
 
+        /* =========================================
+           RESPONSIVE DESIGN (TABLET & MOBILE FIX)
+           ========================================= */
+        
+        /* Untuk Layar Tablet */
         @media (max-width: 992px) { 
             .about-container { flex-direction: column; text-align: center; } 
             .stats-grid { flex-direction: column; } 
             .hero-image { display: none; } 
             .tools-logo-container { justify-content: center; } 
+            .project-grid { grid-template-columns: repeat(2, 1fr); }
             .contact-box { padding: 40px 25px; }
+        }
+
+        /* Untuk Layar HP (Mobile) */
+        @media (max-width: 768px) {
+            /* Perbaiki Menu Navigasi */
+            nav { flex-direction: column; padding: 15px; border-radius: 20px; gap: 10px; width: 95%; }
+            nav ul { flex-wrap: wrap; justify-content: center; gap: 10px; }
+            nav ul li a { font-size: 0.8rem; }
+            
+            /* Perbaiki Hero Section (Teks & Tombol) */
+            section { padding: 100px 5% 40px; }
+            .hero { height: auto; padding-top: 150px; text-align: center; }
+            .hero-content { display: flex; flex-direction: column; align-items: center; }
+            .hero h1 { font-size: 2.5rem; letter-spacing: -1px; }
+            .hero p { font-size: 1rem; }
+            .btn-container { flex-direction: column; width: 100%; gap: 15px; }
+            .btn-primary, .btn-secondary { width: 100%; text-align: center; }
+            
+            /* Perbaiki Grid Proyek Utama */
+            .project-grid { grid-template-columns: 1fr; }
+            
+            /* Perbaiki Jarak Layout Umum */
+            .section-title { font-size: 2rem; text-align: center; }
+            .timeline { padding-left: 20px; }
+            .timeline-item::before { left: -31px; }
+            .about-image-wrapper { width: 100%; max-width: 300px; height: auto; aspect-ratio: 4/5; margin: 0 auto; }
+            
+            /* Perbaiki Kotak Kontak */
             .social-links-container { flex-direction: column; width: 100%; align-items: center;}
             .social-link-editorial { width: 100%; justify-content: center; max-width: 300px;}
         }
@@ -357,7 +380,7 @@
             
             <div style="margin-top: 40px; z-index: 1;">
                  <p style="font-family: 'Playfair Display', serif; font-size: 1.2rem; font-style: italic; color: var(--text-dim); margin-bottom: 5px;">Warm regards,</p>
-                 <h3 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--text-main); line-height: 1.2;">Nada Fitria Berliana</h3>
+                 <h3 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--text-main); line-height: 1.2;">Nada F. B.</h3>
             </div>
         </div>
     </section>
