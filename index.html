@@ -53,7 +53,7 @@
             display: flex; justify-content: space-between; align-items: center; z-index: 1000; border: 1px solid var(--border-color);
         }
         .logo { font-weight: 800; font-size: 1.2rem; }
-        nav ul { display: flex; list-style: none; gap: 20px; align-items: center; }
+        nav ul { display: flex; list-style: none; gap: 15px; align-items: center; }
         nav ul li a { text-decoration: none; color: var(--text-main); font-size: 0.85rem; font-weight: 600; opacity: 0.7; transition: 0.3s; }
         nav ul li a:hover { opacity: 1; color: var(--accent-primary); }
         #theme-toggle { background: var(--gradient); border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; color: white; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
@@ -113,6 +113,48 @@
         .proj-info { padding: 25px; flex: 1; display: flex; flex-direction: column; }
         .tag { color: var(--accent-secondary); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 10px; }
 
+        /* --- NEW: GALERI SATU FRAME BESAR ALA PINTEREST --- */
+        .big-gallery-frame { 
+            background: var(--card-bg); 
+            border: 1px solid var(--border-color); 
+            border-radius: 40px; 
+            padding: 40px; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2); 
+            backdrop-filter: blur(15px);
+        }
+        .masonry-grid { 
+            column-count: 3; /* 3 Kolom sejajar */
+            column-gap: 20px; 
+        }
+        .gallery-item { 
+            display: block; 
+            margin-bottom: 20px; 
+            border-radius: 15px; 
+            overflow: hidden; 
+            border: 1px solid var(--border-color); 
+            transition: 0.4s; 
+            break-inside: avoid; /* Biar gambar ga kepotong di tengah kolom */
+            background: rgba(255,255,255,0.03);
+            position: relative;
+        }
+        .gallery-item img { 
+            width: 100%; 
+            display: block; 
+            height: auto; /* Rahasia biar gambar apapun ga terpotong (NO CROP) */
+            transition: 0.5s; 
+        }
+        .gallery-item::after { /* Efek gradasi hitam di bawah gambar */
+            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 50%;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: 0.4s; pointer-events: none;
+        }
+        .gallery-icon { position: absolute; bottom: 15px; right: 15px; color: white; font-size: 1.2rem; opacity: 0; transform: translateY(10px); transition: 0.4s; z-index: 2; }
+        
+        .gallery-item:hover { transform: translateY(-5px); border-color: var(--accent-primary); box-shadow: 0 10px 25px rgba(125, 95, 255, 0.3); z-index: 10; }
+        .gallery-item:hover img { transform: scale(1.05); }
+        .gallery-item:hover::after { opacity: 1; }
+        .gallery-item:hover .gallery-icon { opacity: 1; transform: translateY(0); }
+
+
         .achievement-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
         .achievement-card { background: var(--card-bg); padding: 25px; border-radius: 25px; border: 1px solid var(--border-color); transition: 0.4s; position: relative; overflow: hidden; }
         .achievement-card:hover { transform: translateY(-8px); border-color: var(--accent-primary); }
@@ -143,7 +185,6 @@
            RESPONSIVE DESIGN (TABLET & MOBILE FIX)
            ========================================= */
         
-        /* Untuk Layar Tablet */
         @media (max-width: 992px) { 
             .about-container { flex-direction: column; text-align: center; } 
             .stats-grid { flex-direction: column; } 
@@ -151,16 +192,13 @@
             .tools-logo-container { justify-content: center; } 
             .project-grid { grid-template-columns: repeat(2, 1fr); }
             .contact-box { padding: 40px 25px; }
+            .masonry-grid { column-count: 2; } /* Jadi 2 kolom di Tablet */
         }
 
-        /* Untuk Layar HP (Mobile) */
         @media (max-width: 768px) {
-            /* Perbaiki Menu Navigasi */
             nav { flex-direction: column; padding: 15px; border-radius: 20px; gap: 10px; width: 95%; }
             nav ul { flex-wrap: wrap; justify-content: center; gap: 10px; }
             nav ul li a { font-size: 0.8rem; }
-            
-            /* Perbaiki Hero Section (Teks & Tombol) */
             section { padding: 100px 5% 40px; }
             .hero { height: auto; padding-top: 150px; text-align: center; }
             .hero-content { display: flex; flex-direction: column; align-items: center; }
@@ -168,17 +206,17 @@
             .hero p { font-size: 1rem; }
             .btn-container { flex-direction: column; width: 100%; gap: 15px; }
             .btn-primary, .btn-secondary { width: 100%; text-align: center; }
-            
-            /* Perbaiki Grid Proyek Utama */
             .project-grid { grid-template-columns: 1fr; }
             
-            /* Perbaiki Jarak Layout Umum */
+            /* HP FIX: Galeri jadi 2 kolom rapat biar pas di HP */
+            .big-gallery-frame { padding: 20px; border-radius: 25px; }
+            .masonry-grid { column-count: 2; column-gap: 10px; }
+            .gallery-item { margin-bottom: 10px; border-radius: 10px; }
+
             .section-title { font-size: 2rem; text-align: center; }
             .timeline { padding-left: 20px; }
             .timeline-item::before { left: -31px; }
             .about-image-wrapper { width: 100%; max-width: 300px; height: auto; aspect-ratio: 4/5; margin: 0 auto; }
-            
-            /* Perbaiki Kotak Kontak */
             .social-links-container { flex-direction: column; width: 100%; align-items: center;}
             .social-link-editorial { width: 100%; justify-content: center; max-width: 300px;}
         }
@@ -191,6 +229,7 @@
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#projects">Projects</a></li>
+            <li><a href="#designs">Gallery</a></li>
             <li><a href="#achievements">Achievements</a></li>
             <li><a href="#experience">Experience</a></li>
             <li><a href="#contact">Contact</a></li>
@@ -278,6 +317,45 @@
                     <h3 style="margin-bottom: 10px;">KSM IoT Branding</h3>
                     <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.6;">Strategi komunikasi digital dan perancangan identitas visual untuk organisasi kampus.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="designs" class="reveal">
+        <h2 class="section-title">Editing and Graphic Design</h2>
+        <p style="color: var(--text-dim); margin-bottom: 40px; font-size: 1rem; font-style: italic; text-align: center;">- Adobe Photoshop, Lightroom, Figma, Canva, and Capcut -</p>
+        
+        <div class="big-gallery-frame">
+            <div class="masonry-grid">
+                
+                <a href="https://www.instagram.com/p/DVDRsqSAHTa/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="gallery-item">
+                    <img src="images/gallery1.png" alt="Desain 1">
+                    <i class="fab fa-instagram gallery-icon"></i>
+                </a>
+
+                <a href="https://www.instagram.com/p/DTNEPBEEazg/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="gallery-item">
+                    <img src="images/gallery2.png" alt="Desain 2">
+                    <i class="fab fa-instagram gallery-icon"></i>
+                </a>
+
+                <a href="https://www.instagram.com/p/DS4p_9OEYB8/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="gallery-item">
+                    <img src="images/gallery3.png" alt="Desain 3">
+                    <i class="fab fa-instagram gallery-icon"></i>
+                </a>
+                
+                <a href="https://www.instagram.com/p/DMNCzpNxAZn/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="gallery-item">
+                    <img src="images/gallery4.png" alt="Desain 4">
+                    <i class="fab fa-instagram gallery-icon"></i>
+                </a>
+                <a href="https://www.instagram.com/p/DJnkmoVTNY8/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="gallery-item">
+                    <img src="images/gallery5.png" alt="Desain 5">
+                    <i class="fab fa-instagram gallery-icon"></i>
+                </a>
+                <a href="https://www.instagram.com/p/DRB4IFCkZ-F/?utm_source=ig_web_copy_link" target="_blank" class="gallery-item">
+                    <img src="images/gallery6.png" alt="Desain 6">
+                    <i class="fab fa-instagram gallery-icon"></i>
+                </a>
+
             </div>
         </div>
     </section>
