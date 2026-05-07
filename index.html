@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -67,10 +67,10 @@
         animation: pulseGlow 10s infinite alternate ease-in-out;
         }
 
-        /* Sembunyikan kursor asli */
+        /* Hide default cursor */
         @media (pointer: fine) { body, a, button { cursor: none; } }
 
-        /* Desain Magic Cursor */
+        /* Magic Cursor Design */
         .magic-cursor {
         position: fixed;
         top: 0; left: 0;
@@ -80,7 +80,7 @@
         transform: translate(-50%, -50%);
         pointer-events: none;
         z-index: 9999;
-        mix-blend-mode: difference; /* Ini efek ajaibnya! */
+        mix-blend-mode: difference; 
         transition: width 0.3s ease, height 0.3s ease;
         }
 
@@ -177,7 +177,7 @@
         .proj-info { padding: 25px; flex: 1; display: flex; flex-direction: column; }
         .tag { color: var(--accent-secondary); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 10px; }
 
-        /* --- NEW: GALERI SATU FRAME BESAR ALA PINTEREST --- */
+        /* --- NEW: PINTEREST STYLE MASONRY GALLERY --- */
         .big-gallery-frame { 
             background: var(--card-bg); 
             border: 1px solid var(--border-color); 
@@ -187,7 +187,7 @@
             backdrop-filter: blur(15px);
         }
         .masonry-grid { 
-            column-count: 3; /* 3 Kolom sejajar */
+            column-count: 3; 
             column-gap: 20px; 
         }
         .gallery-item { 
@@ -197,17 +197,17 @@
             overflow: hidden; 
             border: 1px solid var(--border-color); 
             transition: 0.4s; 
-            break-inside: avoid; /* Biar gambar ga kepotong di tengah kolom */
+            break-inside: avoid; 
             background: rgba(255,255,255,0.03);
             position: relative;
         }
         .gallery-item img { 
             width: 100%; 
             display: block; 
-            height: auto; /* Rahasia biar gambar apapun ga terpotong (NO CROP) */
+            height: auto; 
             transition: 0.5s; 
         }
-        .gallery-item::after { /* Efek gradasi hitam di bawah gambar */
+        .gallery-item::after { 
             content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 50%;
             background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: 0.4s; pointer-events: none;
         }
@@ -256,7 +256,7 @@
             .tools-logo-container { justify-content: center; } 
             .project-grid { grid-template-columns: repeat(2, 1fr); }
             .contact-box { padding: 40px 25px; }
-            .masonry-grid { column-count: 2; } /* Jadi 2 kolom di Tablet */
+            .masonry-grid { column-count: 2; } 
         }
 
         @media (max-width: 768px) {
@@ -272,7 +272,6 @@
             .btn-primary, .btn-secondary { width: 100%; text-align: center; }
             .project-grid { grid-template-columns: 1fr; }
             
-            /* HP FIX: Galeri jadi 2 kolom rapat biar pas di HP */
             .big-gallery-frame { padding: 20px; border-radius: 25px; }
             .masonry-grid { column-count: 2; column-gap: 10px; }
             .gallery-item { margin-bottom: 10px; border-radius: 10px; }
@@ -305,7 +304,12 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <div class="badge">Electrical Engineering Student</div>
-            <h1>Halo, saya <br><span class="highlight">Nada Fitria Berliana</span></h1>
+            <div class="hero-intro">
+                <p id="greeting" style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.8rem; color: var(--accent-secondary); margin-bottom: 10px;">Hello,</p>
+                <h1 style="margin-top: 0; font-size: 4rem; line-height: 1.1;">
+                I'm <span class="highlight">Nada Fitria Berliana</span>
+                </h1>
+            </div>
             <p>Electrical Engineering Student at UPNVJ Exploring IoT, Research, and Digital Design.</p>
             <div class="btn-container">
                 <a href="#about" class="btn-primary">About Me</a>
@@ -318,13 +322,13 @@
     </section>
 
     <section id="about" class="reveal">
-        <h2 class="section-title">Tentang Saya</h2>
+        <h2 class="section-title">About Me</h2>
         <div class="about-container">
             <div class="about-text">
                 <div class="about-content">
-                    <p>Saya adalah mahasiswa S1 Teknik Elektro peminatan Telekomunikasi di Universitas Pembangunan Nasional “Veteran” Jakarta dengan minat pada pengembangan solusi berbasis teknologi, riset, dan komunikasi publik.</p>
+                    <p>I am an undergraduate Electrical Engineering student majoring in Telecommunications at Universitas Pembangunan Nasional "Veteran" Jakarta, with a strong interest in technology-based solutions, research, and public communication.</p>
                     <br>
-                    <p>Aktif sebagai Head of Media & Information Department di KSM Internet of Things, saya berpengalaman dalam penulisan esai kompetitif, presentasi akademik, serta UI prototyping menggunakan Figma.</p>
+                    <p>Currently serving as the Head of the Media & Information Department at KSM Internet of Things, I have experience in competitive essay writing, academic presentations, and UI prototyping using Figma.</p>
                 </div>
                 
                 <div class="tools-logo-container">
@@ -349,7 +353,7 @@
     </section>
 
     <section id="projects" class="reveal">
-        <h2 class="section-title">Proyek Utama</h2>
+        <h2 class="section-title">Featured Projects</h2>
         <div class="project-grid">
             <div class="project-card">
                 <div class="proj-img">
@@ -358,7 +362,7 @@
                 <div class="proj-info">
                     <span class="tag">IoT & Health</span>
                     <h3 style="margin-bottom: 10px;">LOKASEHAT</h3>
-                    <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.6;">Konsep aplikasi berbasis IoT dan geospasial untuk pencegahan penyakit menular melalui pemantauan lingkungan.</p>
+                    <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.6;">An IoT and geospatial-based application concept for preventing infectious diseases through environmental monitoring.</p>
                 </div>
             </div>
             
@@ -369,7 +373,7 @@
                 <div class="proj-info">
                     <span class="tag">Research</span>
                     <h3 style="margin-bottom: 10px;">Academic Integrity</h3>
-                    <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.6;">Esai ilmiah populer menganalisis tantangan etika integritas akademik di era AI untuk reformasi akademik.</p>
+                    <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.6;">A popular scientific essay analyzing the ethical challenges of academic integrity in the AI era to encourage academic reform.</p>
                 </div>
             </div>
             
@@ -380,7 +384,7 @@
                 <div class="proj-info">
                     <span class="tag">Digital Branding</span>
                     <h3 style="margin-bottom: 10px;">KSM IoT Branding</h3>
-                    <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.6;">Strategi komunikasi digital dan perancangan identitas visual untuk organisasi kampus.</p>
+                    <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.6;">Digital communication strategies and visual identity design for a campus organization.</p>
                 </div>
             </div>
         </div>
@@ -394,30 +398,30 @@
             <div class="masonry-grid">
                 
                 <a href="https://www.instagram.com/p/DVDRsqSAHTa/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="gallery-item">
-                    <img src="images/gallery1.png" alt="Desain 1">
+                    <img src="images/gallery1.png" alt="Design 1">
                     <i class="fab fa-instagram gallery-icon"></i>
                 </a>
 
                 <a href="https://www.instagram.com/p/DTNEPBEEazg/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="gallery-item">
-                    <img src="images/gallery2.png" alt="Desain 2">
+                    <img src="images/gallery2.png" alt="Design 2">
                     <i class="fab fa-instagram gallery-icon"></i>
                 </a>
 
                 <a href="https://www.instagram.com/p/DS4p_9OEYB8/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="gallery-item">
-                    <img src="images/gallery3.png" alt="Desain 3">
+                    <img src="images/gallery3.png" alt="Design 3">
                     <i class="fab fa-instagram gallery-icon"></i>
                 </a>
                 
                 <a href="https://www.instagram.com/p/DMNCzpNxAZn/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="gallery-item">
-                    <img src="images/gallery4.png" alt="Desain 4">
+                    <img src="images/gallery4.png" alt="Design 4">
                     <i class="fab fa-instagram gallery-icon"></i>
                 </a>
                 <a href="https://www.instagram.com/p/DJnkmoVTNY8/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="gallery-item">
-                    <img src="images/gallery5.png" alt="Desain 5">
+                    <img src="images/gallery5.png" alt="Design 5">
                     <i class="fab fa-instagram gallery-icon"></i>
                 </a>
                 <a href="https://www.instagram.com/p/DRB4IFCkZ-F/?utm_source=ig_web_copy_link" target="_blank" class="gallery-item">
-                    <img src="images/gallery6.png" alt="Desain 6">
+                    <img src="images/gallery6.png" alt="Design 6">
                     <i class="fab fa-instagram gallery-icon"></i>
                 </a>
 
@@ -430,23 +434,23 @@
         <div class="achievement-grid">
             <div class="achievement-card">
                 <i class="fas fa-trophy watermark"></i>
-                <div class="achieve-title"><i class="fas fa-award"></i> Juara 1 Lomba Esai Ilmiah Populer</div>
+                <div class="achieve-title"><i class="fas fa-award"></i> 1st Place in Popular Scientific Essay Competition</div>
                 <div class="achieve-org">UPN Veteran Jakarta | 2025</div>
                 <ul class="achieve-list">
-                    <li>Judul: Jujur di Ujung Jari? Menavigasi Ujian Etika Akademik di tengah Tsunami Informasi Digital.</li>
-                    <li>Menganalisis isu integritas akademik di era Artificial Intelligence berbasis literatur ilmiah.</li>
-                    <li>Mengusulkan solusi literasi etika digital dan reformasi sistem evaluasi akademik.</li>
+                    <li>Title: Honest at the Fingertips? Navigating Academic Ethics Exams Amidst the Digital Information Tsunami.</li>
+                    <li>Analyzed academic integrity issues in the Artificial Intelligence era based on scientific literature.</li>
+                    <li>Proposed solutions for digital ethics literacy and academic evaluation system reform.</li>
                 </ul>
             </div>
             <div class="achievement-card">
                 <i class="fas fa-medal watermark"></i>
-                <div class="achieve-title"><i class="fas fa-medal"></i> Juara 2 & Best Presentation LKTI</div>
+                <div class="achieve-title"><i class="fas fa-medal"></i> 2nd Place & Best Presentation in Scientific Paper Competition</div>
                 <div class="achieve-org">ELECTROLYMPIC UPNVJ | 2025</div>
                 <ul class="achieve-list">
-                    <li>LOKASEHAT: Aplikasi Pencegahan Penyakit Menular Berbasis IoT dan Pemetaan Geospasial.</li>
-                    <li>Menyusun full paper ilmiah berbasis analisis permasalahan aktual dengan pendekatan sistematis.</li>
-                    <li>Merancang solusi inovatif berbasis teknologi Teknik Elektro.</li>
-                    <li>Meraih penghargaan Best Presentation melalui presentasi hasil penelitian secara argumentatif.</li>
+                    <li>LOKASEHAT: An IoT and Geospatial Mapping-Based Infectious Disease Prevention App.</li>
+                    <li>Drafted a full scientific paper based on the analysis of current issues using a systematic approach.</li>
+                    <li>Designed an innovative solution based on Electrical Engineering technology.</li>
+                    <li>Won the Best Presentation award by delivering argumentative research findings.</li>
                 </ul>
             </div>
             <div class="achievement-card">
@@ -454,7 +458,7 @@
                 <div class="achieve-title"><i class="fas fa-certificate"></i> Best Staff Outstanding Contribution Award</div>
                 <div class="achieve-org">KSM Internet of Things UPNVJ | 2025</div>
                 <ul class="achieve-list">
-                    <li>Diberikan atas kontribusi aktif, konsistensi kinerja, dan dedikasi penuh dalam mendukung program kerja organisasi.</li>
+                    <li>Awarded for active contribution, consistent performance, and full dedication in supporting the organization's work programs.</li>
                 </ul>
             </div>
         </div>
@@ -466,32 +470,32 @@
             <div class="timeline-item">
                 <div class="timeline-date">2026 - Present</div>
                 <h3>Head of Media & Information Department</h3>
-                <p>KSM Internet of Things UPNVJ - Memimpin dua divisi (Public Relations dan Creative Media) dalam merancang strategi komunikasi organisasi, mengelola sistem publikasi, serta mengembangkan branding dan identitas visual organisasi.</p>
+                <p>KSM Internet of Things UPNVJ - Led two divisions (Public Relations and Creative Media) in designing organizational communication strategies, managing publication systems, and developing the organization's branding and visual identity.</p>
             </div>
             <div class="timeline-item">
                 <div class="timeline-date">2025-2026</div>
                 <h3>Staff of Creative Media Division</h3>
-                <p>KSM Internet of Things UPNVJ - Mengembangkan konten visual untuk media sosial dan publikasi organisasi serta berkontribusi dalam strategi branding digital guna meningkatkan awareness terhadap teknologi Internet of Things.</p>
+                <p>KSM Internet of Things UPNVJ - Developed visual content for social media and organizational publications, contributing to digital branding strategies to increase awareness of Internet of Things technology.</p>
             </div>
             <div class="timeline-item">
                 <div class="timeline-date">2024 - 2026</div>
-                <h3>Tutor Akademik</h3>
-                <p>Mengajar materi dasar seperti Rangkaian Listrik, Kimia Dasar, Kalkulus, dan Matematika I kepada mahasiswa serta memfasilitasi sesi diskusi dan tanya jawab untuk memperdalam pemahaman konsep.</p>
+                <h3>Academic Tutor</h3>
+                <p>Taught basic subjects such as Electrical Circuits, Basic Chemistry, Calculus, and Mathematics I to university students, while facilitating Q&A sessions to deepen conceptual understanding.</p>
             </div>
             <div class="timeline-item">
                 <div class="timeline-date">2024 - 2025</div>
                 <h3>Master of Ceremony (MC)</h3>
-                <p>Academic & Organizational Events - Membawakan berbagai acara akademik dan organisasi seperti PROPEL KTI, BATAREL, dan EGOTS serta menyusun naskah acara untuk memastikan alur kegiatan berjalan dengan baik.</p>
+                <p>Academic & Organizational Events - Hosted various academic and organizational events such as PROPEL KTI, BATAREL, and EGOTS, and drafted event scripts to ensure smooth execution.</p>
             </div>
              <div class="timeline-item">
                 <div class="timeline-date">2025</div>
                 <h3>Head of HPDD Division</h3>
-                <p>I-VISIT: IoT UPNVJ x IoT Universitas Brawijaya - Memimpin tim dalam perencanaan publikasi, dokumentasi, dan komunikasi eksternal untuk menjaga profesionalitas serta konsistensi identitas visual kegiatan.</p>
+                <p>I-VISIT: IoT UPNVJ x IoT Universitas Brawijaya - Led the team in planning publications, documentation, and external communications to maintain professionalism and visual identity consistency.</p>
             </div>
             <div class="timeline-item">
                 <div class="timeline-date">2025</div>
-                <h3>Staf Divisi Pengajar</h3>
-                <p>TEMA (Teknik Elektro Mengajar) - Berkontribusi sebagai pengajar dalam kegiatan edukasi untuk anak-anak di lingkungan masyarakat, dengan menyampaikan materi secara komunikatif dan interaktif serta menciptakan suasana belajar yang menyenangkan.</p>
+                <h3>Teaching Division Staff</h3>
+                <p>TEMA (Teknik Elektro Mengajar) - Contributed as a teacher in educational activities for local children, delivering engaging materials interactively to create a fun learning environment.</p>
             </div>
         </div>
     </section>
@@ -507,10 +511,10 @@
         <div class="contact-box">
             <div class="contact-content">
                 <p style="color: var(--text-dim); font-size: 1.1rem; line-height: 1.8; margin-bottom: 10px;">
-                    Terima kasih sudah berkunjung! Saya selalu mencari peluang baru untuk menerapkan keahlian saya dalam proyek-proyek inovatif.
+                    Thank you for visiting! I am always looking for new opportunities to apply my skills to innovative projects.
                 </p>
                 <p style="font-family: 'Playfair Display', serif; font-size: 1.5rem; font-style: italic; color: var(--text-main); margin-bottom: 30px;">
-                    Mari berdiskusi tentang bagaimana kita bisa bekerja sama.
+                    Let's discuss how we can work together.
                 </p>
             </div>
             
@@ -592,6 +596,21 @@
             el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
             el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
         });
+
+        // Automatic Time Greeting Script
+        const greetingElement = document.getElementById('greeting');
+        const hour = new Date().getHours();
+        
+        let greetingText = 'Hello,';
+        if (hour >= 5 && hour < 12) {
+            greetingText = 'Good Morning,';
+        } else if (hour >= 12 && hour < 17) {
+            greetingText = 'Good Afternoon,';
+        } else {
+            greetingText = 'Good Evening,';
+        }
+        
+        greetingElement.innerText = greetingText;
 
     </script>
 </body>
