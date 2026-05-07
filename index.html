@@ -67,6 +67,28 @@
         animation: pulseGlow 10s infinite alternate ease-in-out;
         }
 
+        /* Sembunyikan kursor asli */
+        @media (pointer: fine) { body, a, button { cursor: none; } }
+
+        /* Desain Magic Cursor */
+        .magic-cursor {
+        position: fixed;
+        top: 0; left: 0;
+        width: 20px; height: 20px;
+        background-color: white;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 9999;
+        mix-blend-mode: difference; /* Ini efek ajaibnya! */
+        transition: width 0.3s ease, height 0.3s ease;
+        }
+
+        .magic-cursor.hovered {
+        width: 60px;
+        height: 60px;
+        }
+
         nav {
             position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 1150px;
             background: var(--nav-bg); backdrop-filter: blur(15px); padding: 12px 30px; border-radius: 50px;
@@ -265,6 +287,7 @@
     </style>
 </head>
 <body>
+   <div class="magic-cursor"></div>
     <nav>
         <div class="logo">Nada's Portfolio</div>
         <ul>
@@ -505,7 +528,7 @@
             
             <div style="margin-top: 40px; z-index: 1;">
                  <p style="font-family: 'Playfair Display', serif; font-size: 1.2rem; font-style: italic; color: var(--text-dim); margin-bottom: 5px;">Warm regards,</p>
-                 <h3 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--text-main); line-height: 1.2;">Nada F. B.</h3>
+                 <h3 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--text-main); line-height: 1.2;">Nada Fitria Berliana</h3>
             </div>
         </div>
     </section>
@@ -532,6 +555,44 @@
         }
         window.addEventListener("scroll", reveal);
         reveal();
+
+        const cards = document.querySelectorAll('.project-card, .achievement-card');
+
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left; 
+                const y = e.clientY - rect.top;  
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = ((y - centerY) / centerY) * -10; 
+                const rotateY = ((x - centerX) / centerX) * 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                card.style.transition = "none"; 
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                card.style.transition = "transform 0.5s ease"; 
+            });
+        });
+
+        // Script Magic Cursor
+        const cursor = document.querySelector('.magic-cursor');
+
+        window.addEventListener('mousemove', (e) => {
+            cursor.style.left = `${e.clientX}px`;
+            cursor.style.top = `${e.clientY}px`;
+        });
+
+        const hoverEls = document.querySelectorAll('a, button, .project-card, .gallery-item');
+        hoverEls.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+        });
+
     </script>
 </body>
 </html>
