@@ -90,11 +90,24 @@
             background-color: rgba(125, 95, 255, 0.4); 
             border: 1px solid var(--accent-primary); 
         }
-        /* KELAS BARU: Biar kursor hilang instan tanpa delay */
+        /* Kursor hilang instan tanpa delay */
         .magic-cursor.hidden-cursor {
             opacity: 0 !important;
             transition: opacity 0s !important; 
         }
+
+        /* --- Back to Top Button --- */
+        #back-to-top {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 45px; height: 45px; border-radius: 50%;
+            background: var(--gradient); color: white;
+            border: none; outline: none; cursor: pointer;
+            box-shadow: 0 5px 15px rgba(125, 95, 255, 0.4);
+            opacity: 0; visibility: hidden; transition: 0.3s;
+            z-index: 999; display: flex; align-items: center; justify-content: center;
+        }
+        #back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
+        #back-to-top:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(69, 170, 242, 0.5); }
 
         nav {
             position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 1150px;
@@ -285,6 +298,7 @@
 <body>
     <div id="scroll-progress"></div>
     <div class="magic-cursor"></div>
+    <button id="back-to-top" title="Go to top"><i class="fas fa-arrow-up"></i></button>
     
     <nav>
         <div class="logo">Nada's Portfolio</div>
@@ -713,6 +727,42 @@
             greetingText = 'Good Evening,';
         }
         greetingElement.innerText = greetingText;
+
+
+        // --- MAGNETIC BUTTONS ---
+        const magnetBtns = document.querySelectorAll('.btn-primary, .btn-secondary');
+        magnetBtns.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                // Tombol akan bergerak sedikit mengikuti arah kursor
+                btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.05)`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                // Tombol kembali ke posisi semula kalau kursor pergi
+                btn.style.transform = `translate(0px, 0px) scale(1)`;
+            });
+        });
+
+        // --- Smart Back to Top Button ---
+        const backToTop = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            // Tombol muncul kalau udah scroll lebih dari 300px
+            if (window.scrollY > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+        backToTop.addEventListener('click', () => {
+            // Animasi scroll mulus ke atas
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Kursor buatan membesar saat kena tombol Back to Top
+        backToTop.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+        backToTop.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
 
     </script>
 </body>
