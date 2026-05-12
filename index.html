@@ -81,12 +81,18 @@
         pointer-events: none;
         z-index: 9999;
         mix-blend-mode: difference; 
-        transition: width 0.3s ease, height 0.3s ease;
+        transition: width 0.3s ease, height 0.3s ease, mix-blend-mode 0.3s ease, background-color 0.3s ease;
         }
 
         .magic-cursor.hovered {
         width: 60px;
         height: 60px;
+        }
+
+        .magic-cursor.no-invert {
+        mix-blend-mode: normal; /* Ini yang matiin efek seramnya */
+        background-color: rgba(125, 95, 255, 0.4); 
+        border: 1px solid var(--accent-primary); 
         }
 
         nav {
@@ -591,10 +597,24 @@
             cursor.style.top = `${e.clientY}px`;
         });
 
-        const hoverEls = document.querySelectorAll('a, button, .project-card, .gallery-item');
+        // 1. Kursor untuk tombol & teks (Tetap Invert)
+        const hoverEls = document.querySelectorAll('a, button');
         hoverEls.forEach(el => {
             el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
             el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+        });
+
+        // 2. Kursor khusus untuk Foto & Gambar (TIDAK Invert)
+        const imageEls = document.querySelectorAll('.hero-image .image-card, .gallery-item, .project-card .proj-img, .about-photo'); 
+        imageEls.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('hovered'); 
+                cursor.classList.add('no-invert'); // Panggil CSS baru untuk matiin efek invert
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hovered');
+                cursor.classList.remove('no-invert'); // Nyalain lagi efek invert kalau udah keluar gambar
+            });
         });
 
         // Automatic Time Greeting Script
@@ -609,7 +629,6 @@
         } else {
             greetingText = 'Good Evening,';
         }
-        
         greetingElement.innerText = greetingText;
 
     </script>
