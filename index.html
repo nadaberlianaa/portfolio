@@ -36,6 +36,10 @@
             --gradient: linear-gradient(135deg, #5e35b1 0%, #0071e3 100%);
         }
 
+        /* --- Custom Selection Color --- */
+        ::selection { background: var(--accent-primary); color: white; }
+        ::-moz-selection { background: var(--accent-primary); color: white; }
+
         html { scroll-behavior: smooth; scroll-padding-top: 70px; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background-color: var(--bg-color); color: var(--text-main); overflow-x: hidden; transition: 0.4s; }
@@ -50,49 +54,46 @@
         /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { 
-        background: rgba(125, 95, 255, 0.3); 
-        border-radius: 20px; 
-        }
-        ::-webkit-scrollbar-thumb:hover { 
-        background: var(--accent-primary); 
+        ::-webkit-scrollbar-thumb { background: rgba(125, 95, 255, 0.3); border-radius: 20px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-primary); }
+
+        /* --- Scroll Progress Bar --- */
+        #scroll-progress {
+            position: fixed; top: 0; left: 0; width: 0%; height: 4px; background: var(--gradient);
+            z-index: 999999; transition: width 0.1s ease-out; border-radius: 0 2px 2px 0;
+            box-shadow: 0 0 10px var(--accent-primary);
         }
 
         @keyframes pulseGlow {
-        0% { opacity: 0.5; transform: scale(1); }
-        50% { opacity: 1; transform: scale(1.1); }
-        100% { opacity: 0.5; transform: scale(1); }
+            0% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+            100% { opacity: 0.5; transform: scale(1); }
         }
-        body::before {
-        animation: pulseGlow 10s infinite alternate ease-in-out;
-        }
+        body::before { animation: pulseGlow 10s infinite alternate ease-in-out; }
 
         /* Hide default cursor */
         @media (pointer: fine) { body, a, button { cursor: none; } }
 
         /* Magic Cursor Design */
         .magic-cursor {
-        position: fixed;
-        top: 0; left: 0;
-        width: 20px; height: 20px;
-        background-color: white;
-        border-radius: 50%;
-        transform: translate(-50%, -50%);
-        pointer-events: none;
-        z-index: 9999;
-        mix-blend-mode: difference; 
-        transition: width 0.3s ease, height 0.3s ease, mix-blend-mode 0.3s ease, background-color 0.3s ease;
+            position: fixed; top: 0; left: 0;
+            width: 20px; height: 20px;
+            background-color: white; border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none; z-index: 9999;
+            mix-blend-mode: difference; 
+            transition: width 0.3s ease, height 0.3s ease, mix-blend-mode 0.3s ease, background-color 0.3s ease, opacity 0.2s ease;
         }
-
-        .magic-cursor.hovered {
-        width: 60px;
-        height: 60px;
-        }
-
+        .magic-cursor.hovered { width: 60px; height: 60px; }
         .magic-cursor.no-invert {
-        mix-blend-mode: normal; /* Ini yang matiin efek seramnya */
-        background-color: rgba(125, 95, 255, 0.4); 
-        border: 1px solid var(--accent-primary); 
+            mix-blend-mode: normal; 
+            background-color: rgba(125, 95, 255, 0.4); 
+            border: 1px solid var(--accent-primary); 
+        }
+        /* KELAS BARU: Biar kursor hilang instan tanpa delay */
+        .magic-cursor.hidden-cursor {
+            opacity: 0 !important;
+            transition: opacity 0s !important; 
         }
 
         nav {
@@ -117,35 +118,28 @@
         .hero h1 { font-size: 3.8rem; line-height: 1.1; margin-bottom: 20px; font-weight: 800; letter-spacing: -2px; }
         
         @keyframes gradientMove {
-         0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         .highlight {
-        background: linear-gradient(270deg, #7d5fff, #45aaf2, #ff7eb3, #7d5fff);
-        background-size: 300% 300%;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: gradientMove 6s ease infinite;
+            background: linear-gradient(270deg, #7d5fff, #45aaf2, #ff7eb3, #7d5fff);
+            background-size: 300% 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: gradientMove 6s ease infinite;
         }
 
-        .hero p { color: var(--text-dim); font-size: 1.2rem; margin-bottom: 40px; line-height: 1.6; }
         .btn-container { display: flex; gap: 15px; }
         .btn-primary, .btn-secondary { padding: 14px 32px; border-radius: 40px; text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: 0.4s; display: inline-block; border: none; }
         .btn-primary { background: var(--gradient); color: white; cursor: pointer; }
-        .btn-primary:hover { 
-        transform: translateY(-5px) scale(1.05); 
-        box-shadow: 0 0 25px rgba(125, 95, 255, 0.6), 0 0 50px rgba(69, 170, 242, 0.4); 
-        }
+        .btn-primary:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 0 25px rgba(125, 95, 255, 0.6), 0 0 50px rgba(69, 170, 242, 0.4); }
         .btn-secondary { border: 2px solid var(--border-color); color: var(--text-main); }
         .btn-secondary:hover { border-color: var(--accent-primary); transform: translateY(-8px); }
 
         @keyframes float {
-        0% { transform: translateY(0px) rotate(4deg); }
-        50% { transform: translateY(-20px) rotate(2deg); }
-        100% { transform: translateY(0px) rotate(4deg); }
+            0% { transform: translateY(0px) rotate(4deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(4deg); }
         }
-
         .hero-image .image-card { width: 330px; height: 420px; background: var(--card-bg); border-radius: 40px; border: 1px solid var(--border-color); transform: rotate(4deg); overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.5); transition: 0.6s ease; animation: float 6s ease-in-out infinite; }
         .hero-image:hover .image-card { transform: rotate(0deg) scale(1.05); }
         .hero-image img { width: 100%; height: 100%; object-fit: cover; }
@@ -179,51 +173,52 @@
         .proj-img { height: 180px; width: 100%; background: rgba(28, 28, 42, 0.5); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--accent-primary); position: relative; overflow: hidden; }
         .proj-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
         .project-card:hover .proj-img img { transform: scale(1.1); }
-        
         .proj-info { padding: 25px; flex: 1; display: flex; flex-direction: column; }
         .tag { color: var(--accent-secondary); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 10px; }
 
-        /* --- NEW: PINTEREST STYLE MASONRY GALLERY --- */
-        .big-gallery-frame { 
-            background: var(--card-bg); 
-            border: 1px solid var(--border-color); 
-            border-radius: 40px; 
-            padding: 40px; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2); 
-            backdrop-filter: blur(15px);
-        }
-        .masonry-grid { 
-            column-count: 3; 
-            column-gap: 20px; 
-        }
-        .gallery-item { 
-            display: block; 
-            margin-bottom: 20px; 
-            border-radius: 15px; 
-            overflow: hidden; 
-            border: 1px solid var(--border-color); 
-            transition: 0.4s; 
-            break-inside: avoid; 
-            background: rgba(255,255,255,0.03);
-            position: relative;
-        }
-        .gallery-item img { 
-            width: 100%; 
-            display: block; 
-            height: auto; 
-            transition: 0.5s; 
-        }
-        .gallery-item::after { 
-            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 50%;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: 0.4s; pointer-events: none;
-        }
+        /* Pinterest Style Gallery */
+        .big-gallery-frame { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 40px; padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); backdrop-filter: blur(15px); }
+        .masonry-grid { column-count: 3; column-gap: 20px; }
+        .gallery-item { display: block; margin-bottom: 20px; border-radius: 15px; overflow: hidden; border: 1px solid var(--border-color); transition: 0.4s; break-inside: avoid; background: rgba(255,255,255,0.03); position: relative; }
+        .gallery-item img { width: 100%; display: block; height: auto; transition: 0.5s; }
+        .gallery-item::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: 0.4s; pointer-events: none; }
         .gallery-icon { position: absolute; bottom: 15px; right: 15px; color: white; font-size: 1.2rem; opacity: 0; transform: translateY(10px); transition: 0.4s; z-index: 2; }
-        
         .gallery-item:hover { transform: translateY(-5px); border-color: var(--accent-primary); box-shadow: 0 10px 25px rgba(125, 95, 255, 0.3); z-index: 10; }
         .gallery-item:hover img { transform: scale(1.05); }
         .gallery-item:hover::after { opacity: 1; }
         .gallery-item:hover .gallery-icon { opacity: 1; transform: translateY(0); }
 
+        /* --- PREMIUM VIDEO SECTION CSS --- */
+        .video-showcase { display: flex; flex-direction: column; gap: 50px; background: transparent; padding: 20px 0; }
+        
+        .cinematic-wrapper { position: relative; padding: 20px; background: var(--card-bg); border-radius: 30px; border: 1px solid var(--border-color); box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
+        .cinematic-wrapper::before { content: ''; position: absolute; top: -10px; left: -10px; right: -10px; bottom: -10px; background: var(--gradient); z-index: -1; border-radius: 35px; filter: blur(20px); opacity: 0.3; }
+        .yt-container { position: relative; width: 100%; padding-bottom: 56.25%; border-radius: 20px; overflow: hidden; background: #000; }
+        .yt-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        
+        .reels-header { text-align: center; margin-bottom: -20px; }
+        .reels-header h3 { font-family: 'Inter', sans-serif; font-size: 1.5rem; color: var(--text-main); font-weight: 700; display: inline-flex; align-items: center; gap: 10px; padding: 10px 25px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 30px; backdrop-filter: blur(10px); }
+        .reels-header h3 i { color: #E1306C; }
+
+        .reels-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .custom-reel-card { 
+            position: relative; display: flex; flex-direction: column; justify-content: flex-end; 
+            height: 500px; border-radius: 30px; overflow: hidden; text-decoration: none; 
+            border: 1px solid var(--border-color); box-shadow: 0 20px 40px rgba(0,0,0,0.2); transition: 0.4s; 
+            -webkit-mask-image: -webkit-radial-gradient(white, black); transform: translateZ(0); isolation: isolate; 
+        }
+        .reel-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; transition: 0.5s; }
+        .custom-reel-card:hover { transform: translateY(-10px); border-color: var(--accent-primary); box-shadow: 0 20px 40px rgba(125, 95, 255, 0.3); }
+        .custom-reel-card:hover .reel-bg { transform: scale(1.05); }
+        
+        .play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2; width: 60px; height: 60px; background: rgba(255,255,255,0.2); backdrop-filter: blur(5px); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; transition: 0.3s; border: 1px solid rgba(255,255,255,0.4); }
+        .custom-reel-card:hover .play-btn { background: var(--accent-primary); border-color: var(--accent-primary); transform: translate(-50%, -50%) scale(1.1); }
+        
+        .reel-content { position: relative; z-index: 2; padding: 30px 25px; }
+        .reel-tag { font-size: 0.75rem; font-weight: 800; color: var(--accent-secondary); text-transform: uppercase; margin-bottom: 8px; display: block; }
+        .reel-content h4 { color: white; font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; line-height: 1.3; }
+        .watch-text { color: rgba(255,255,255,0.7); font-size: 0.9rem; font-weight: 600; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .custom-reel-card:hover .watch-text { color: var(--accent-secondary); }
 
         .achievement-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
         .achievement-card { background: var(--card-bg); padding: 25px; border-radius: 25px; border: 1px solid var(--border-color); transition: 0.4s; position: relative; overflow: hidden; }
@@ -244,7 +239,6 @@
         .contact-box::before { content: ''; position: absolute; top: -50px; left: -50px; width: 250px; height: 250px; background: var(--glow-primary); filter: blur(60px); border-radius: 50%; pointer-events: none; z-index: 0; }
         .contact-content { z-index: 1; max-width: 700px; }
         .social-links-container { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 20px; z-index: 1; }
-        
         .social-link-editorial { color: var(--text-main); text-decoration: none; display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 1.05rem; padding: 12px 25px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 30px; transition: 0.3s; }
         .social-link-editorial:hover { background: rgba(125, 95, 255, 0.15); border-color: var(--accent-primary); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(125, 95, 255, 0.2); }
         .social-link-editorial i { color: var(--accent-secondary); font-size: 1.2rem; }
@@ -254,7 +248,6 @@
         /* =========================================
            RESPONSIVE DESIGN (TABLET & MOBILE FIX)
            ========================================= */
-        
         @media (max-width: 992px) { 
             .about-container { flex-direction: column; text-align: center; } 
             .stats-grid { flex-direction: column; } 
@@ -263,8 +256,8 @@
             .project-grid { grid-template-columns: repeat(2, 1fr); }
             .contact-box { padding: 40px 25px; }
             .masonry-grid { column-count: 2; } 
+            .reels-grid { grid-template-columns: repeat(2, 1fr); }
         }
-
         @media (max-width: 768px) {
             nav { flex-direction: column; padding: 15px; border-radius: 20px; gap: 10px; width: 95%; }
             nav ul { flex-wrap: wrap; justify-content: center; gap: 10px; }
@@ -273,26 +266,26 @@
             .hero { height: auto; padding-top: 150px; text-align: center; }
             .hero-content { display: flex; flex-direction: column; align-items: center; }
             .hero h1 { font-size: 2.5rem; letter-spacing: -1px; }
-            .hero p { font-size: 1rem; }
             .btn-container { flex-direction: column; width: 100%; gap: 15px; }
             .btn-primary, .btn-secondary { width: 100%; text-align: center; }
             .project-grid { grid-template-columns: 1fr; }
-            
             .big-gallery-frame { padding: 20px; border-radius: 25px; }
             .masonry-grid { column-count: 2; column-gap: 10px; }
             .gallery-item { margin-bottom: 10px; border-radius: 10px; }
-
             .section-title { font-size: 2rem; text-align: center; }
             .timeline { padding-left: 20px; }
             .timeline-item::before { left: -31px; }
             .about-image-wrapper { width: 100%; max-width: 300px; height: auto; aspect-ratio: 4/5; margin: 0 auto; }
             .social-links-container { flex-direction: column; width: 100%; align-items: center;}
             .social-link-editorial { width: 100%; justify-content: center; max-width: 300px;}
+            .reels-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-   <div class="magic-cursor"></div>
+    <div id="scroll-progress"></div>
+    <div class="magic-cursor"></div>
+    
     <nav>
         <div class="logo">Nada's Portfolio</div>
         <ul>
@@ -300,6 +293,7 @@
             <li><a href="#about">About</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#designs">Gallery</a></li>
+            <li><a href="#videos">Videos</a></li>
             <li><a href="#achievements">Achievements</a></li>
             <li><a href="#experience">Experience</a></li>
             <li><a href="#contact">Contact</a></li>
@@ -316,7 +310,9 @@
                 I'm <span class="highlight">Nada Fitria Berliana</span>
                 </h1>
             </div>
-            <p>Electrical Engineering Student at UPNVJ Exploring IoT, Research, and Digital Design.</p>
+            
+            <p id="typewriter-text" style="color: var(--text-dim); font-size: 1.2rem; margin-bottom: 40px; line-height: 1.6; min-height: 60px;"></p>
+            
             <div class="btn-container">
                 <a href="#about" class="btn-primary">About Me</a>
                 <a href="#contact" class="btn-secondary">Connect With Me</a>
@@ -382,7 +378,7 @@
                     <p style="color: var(--text-dim); font-size: 0.9rem; line-height: 1.6;">A popular scientific essay analyzing the ethical challenges of academic integrity in the AI era to encourage academic reform.</p>
                 </div>
             </div>
-            
+
             <div class="project-card">
                 <div class="proj-img">
                     <img src="images/branding.png" alt="KSM IoT Branding">
@@ -407,17 +403,14 @@
                     <img src="images/gallery1.png" alt="Design 1">
                     <i class="fab fa-instagram gallery-icon"></i>
                 </a>
-
                 <a href="https://www.instagram.com/p/DTNEPBEEazg/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="gallery-item">
                     <img src="images/gallery2.png" alt="Design 2">
                     <i class="fab fa-instagram gallery-icon"></i>
                 </a>
-
                 <a href="https://www.instagram.com/p/DS4p_9OEYB8/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="gallery-item">
                     <img src="images/gallery3.png" alt="Design 3">
                     <i class="fab fa-instagram gallery-icon"></i>
                 </a>
-                
                 <a href="https://www.instagram.com/p/DMNCzpNxAZn/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="gallery-item">
                     <img src="images/gallery4.png" alt="Design 4">
                     <i class="fab fa-instagram gallery-icon"></i>
@@ -430,7 +423,55 @@
                     <img src="images/gallery6.png" alt="Design 6">
                     <i class="fab fa-instagram gallery-icon"></i>
                 </a>
+            </div>
+        </div>
+    </section>
 
+    <section id="videos" class="reveal">
+        <h2 class="section-title">Video & Motion Graphics</h2>
+        <p style="color: var(--text-dim); margin-bottom: 40px; font-size: 1rem; font-style: italic; text-align: center;">- YouTube Content & Instagram Reels Campaign -</p>
+        
+        <div class="video-showcase">
+            <div class="cinematic-wrapper iframe-zone">
+                <div class="yt-container">
+                    <iframe src="https://www.youtube.com/embed/mP45tp8aHxQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="reels-header">
+                <h3><i class="fab fa-instagram"></i> Short-form Campaigns</h3>
+            </div>
+
+            <div class="reels-grid">
+                <a href="https://www.instagram.com/reel/DYKOTM8xZqu/" target="_blank" class="custom-reel-card">
+                    <div class="reel-bg" style="background: linear-gradient(to bottom, rgba(125,95,255,0.2), rgba(8,8,17,0.9)), url('images/sneakpeek.png') center/cover;"></div>
+                    <div class="play-btn"><i class="fas fa-play"></i></div>
+                    <div class="reel-content">
+                        <span class="reel-tag">KSM IoT 2026</span>
+                        <h4>Sneak Peek Foto Kepengurusan</h4>
+                        <p class="watch-text">Watch on Instagram <i class="fas fa-arrow-right"></i></p>
+                    </div>
+                </a>
+
+                <a href="https://www.instagram.com/reel/DTwkrCCkT-a/" target="_blank" class="custom-reel-card">
+                    <div class="reel-bg" style="background: linear-gradient(to bottom, rgba(69,170,242,0.2), rgba(8,8,17,0.9)), url('images/oprec.png') center/cover;"></div>
+                    <div class="play-btn"><i class="fas fa-play"></i></div>
+                    <div class="reel-content">
+                        <span class="reel-tag">Open Recruitment</span>
+                        <h4>Pick Your Role!</h4>
+                        <p class="watch-text">Watch on Instagram <i class="fas fa-arrow-right"></i></p>
+                    </div>
+                </a>
+
+                <a href="https://www.instagram.com/reel/DSZwD8XEaUt/" target="_blank" class="custom-reel-card">
+                    <div class="reel-bg" style="background: linear-gradient(to bottom, rgba(125,95,255,0.2), rgba(8,8,17,0.9)), url('images/i-visit.png') center/cover;"></div>
+                    <div class="play-btn"><i class="fas fa-play"></i></div>
+                    <div class="reel-content">
+                        <span class="reel-tag">I-VISIT Collaboration</span>
+                        <h4>KSM IoT UPNVJ x IoT UB</h4>
+                        <p class="watch-text">Watch on Instagram <i class="fas fa-arrow-right"></i></p>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
@@ -548,6 +589,7 @@
     </footer>
 
     <script>
+        // Theme Toggle
         const themeToggle = document.getElementById('theme-toggle');
         const themeIcon = themeToggle.querySelector('i');
         themeToggle.addEventListener('click', () => {
@@ -555,6 +597,8 @@
             themeIcon.classList.toggle('fa-moon');
             themeIcon.classList.toggle('fa-sun');
         });
+        
+        // Scroll Reveal
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
@@ -566,8 +610,29 @@
         window.addEventListener("scroll", reveal);
         reveal();
 
-        const cards = document.querySelectorAll('.project-card, .achievement-card');
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const scrollPx = document.documentElement.scrollTop;
+            const winHeightPx = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = `${(scrollPx / winHeightPx) * 100}%`;
+            document.getElementById('scroll-progress').style.width = scrolled;
+        });
 
+        // Typewriter Effect
+        const typeText = "Electrical Engineering Student at UPNVJ Exploring IoT, Research, and Digital Design.";
+        const typeElement = document.getElementById('typewriter-text');
+        let typeIndex = 0;
+        function typeWriter() {
+            if (typeIndex < typeText.length) {
+                typeElement.innerHTML += typeText.charAt(typeIndex);
+                typeIndex++;
+                setTimeout(typeWriter, 40); 
+            }
+        }
+        setTimeout(typeWriter, 1000); 
+
+        // 3D Hover Effect
+        const cards = document.querySelectorAll('.project-card, .achievement-card, .custom-reel-card');
         cards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
@@ -589,33 +654,51 @@
             });
         });
 
-        // Script Magic Cursor
+        // --- SCRIPT MAGIC CURSOR (SUPER FIX: INSTANT HIDE) ---
         const cursor = document.querySelector('.magic-cursor');
 
         window.addEventListener('mousemove', (e) => {
             cursor.style.left = `${e.clientX}px`;
             cursor.style.top = `${e.clientY}px`;
+
+            // Sembunyikan instan kalau kena scrollbar kanan/bawah
+            if (e.clientX >= window.innerWidth - 20 || e.clientY >= window.innerHeight - 20) {
+                cursor.classList.add('hidden-cursor');
+            } else {
+                cursor.classList.remove('hidden-cursor');
+            }
         });
 
-        // 1. Kursor untuk tombol & teks (Tetap Invert)
+        // Sembunyikan instan kalau mouse keluar jendela browser
+        document.addEventListener('mouseout', (e) => {
+            if (e.relatedTarget === null) { cursor.classList.add('hidden-cursor'); }
+        });
+
         const hoverEls = document.querySelectorAll('a, button');
         hoverEls.forEach(el => {
             el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
             el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
         });
 
-        // 2. Kursor khusus untuk Foto & Gambar (TIDAK Invert)
-        const imageEls = document.querySelectorAll('.hero-image .image-card, .gallery-item, .project-card .proj-img, .about-photo'); 
+        const imageEls = document.querySelectorAll('.hero-image .image-card, .gallery-item, .project-card .proj-img, .about-photo, iframe, .custom-reel-card'); 
         imageEls.forEach(el => {
             el.addEventListener('mouseenter', () => {
                 cursor.classList.add('hovered'); 
-                cursor.classList.add('no-invert'); // Panggil CSS baru untuk matiin efek invert
+                cursor.classList.add('no-invert'); 
             });
             el.addEventListener('mouseleave', () => {
                 cursor.classList.remove('hovered');
-                cursor.classList.remove('no-invert'); // Nyalain lagi efek invert kalau udah keluar gambar
+                cursor.classList.remove('no-invert'); 
             });
         });
+
+        // ANTI-STUCK YOUTUBE: Sembunyikan instan sebelum nabrak iframe
+        const iframeZones = document.querySelectorAll('.iframe-zone');
+        iframeZones.forEach(zone => {
+            zone.addEventListener('mouseenter', () => cursor.classList.add('hidden-cursor'));
+            zone.addEventListener('mouseleave', () => cursor.classList.remove('hidden-cursor'));
+        });
+        // --- BATAS SCRIPT MAGIC CURSOR ---
 
         // Automatic Time Greeting Script
         const greetingElement = document.getElementById('greeting');
