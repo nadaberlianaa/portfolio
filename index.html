@@ -36,7 +36,6 @@
             --gradient: linear-gradient(135deg, #5e35b1 0%, #0071e3 100%);
         }
 
-        /* --- Custom Selection Color --- */
         ::selection { background: var(--accent-primary); color: white; }
         ::-moz-selection { background: var(--accent-primary); color: white; }
 
@@ -51,13 +50,11 @@
             z-index: -1; pointer-events: none;
         }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: rgba(125, 95, 255, 0.3); border-radius: 20px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--accent-primary); }
 
-        /* --- Scroll Progress Bar --- */
         #scroll-progress {
             position: fixed; top: 0; left: 0; width: 0%; height: 4px; background: var(--gradient);
             z-index: 999999; transition: width 0.1s ease-out; border-radius: 0 2px 2px 0;
@@ -71,38 +68,30 @@
         }
         body::before { animation: pulseGlow 10s infinite alternate ease-in-out; }
 
-        /* Hide default cursor */
         @media (pointer: fine) { body, a, button { cursor: none; } }
 
-        /* Magic Cursor Design */
         .magic-cursor {
-            position: fixed; top: 0; left: 0;
-            width: 20px; height: 20px;
-            background-color: white; border-radius: 50%;
-            transform: translate(-50%, -50%);
-            pointer-events: none; z-index: 9999;
-            mix-blend-mode: difference; 
+            position: fixed; top: 0; left: 0; width: 20px; height: 20px; background-color: white; border-radius: 50%;
+            transform: translate(-50%, -50%); pointer-events: none; z-index: 9999; mix-blend-mode: difference; 
             transition: width 0.3s ease, height 0.3s ease, mix-blend-mode 0.3s ease, background-color 0.3s ease, opacity 0.2s ease;
         }
         .magic-cursor.hovered { width: 60px; height: 60px; }
-        .magic-cursor.no-invert {
-            mix-blend-mode: normal; 
-            background-color: rgba(125, 95, 255, 0.4); 
-            border: 1px solid var(--accent-primary); 
-        }
-        .magic-cursor.hidden-cursor {
-            opacity: 0 !important;
-            transition: opacity 0s !important; 
-        }
+        .magic-cursor.no-invert { mix-blend-mode: normal; background-color: rgba(125, 95, 255, 0.4); border: 1px solid var(--accent-primary); }
+        .magic-cursor.hidden-cursor { opacity: 0 !important; transition: opacity 0s !important; }
 
-        /* --- FITUR BARU: Back to Top Button --- */
+        #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: var(--bg-color); z-index: 9999999; display: flex; align-items: center; justify-content: center; transition: opacity 0.8s ease, visibility 0.8s ease; }
+        #preloader.hide { opacity: 0; visibility: hidden; }
+        .loader-content { text-align: center; }
+        .loader-text { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--text-main); letter-spacing: 4px; margin-bottom: 20px; display: block; animation: pulseText 1.5s infinite; }
+        .loader-bar { width: 250px; height: 2px; background: rgba(255,255,255,0.1); margin: 0 auto; overflow: hidden; position: relative; }
+        .loader-progress { position: absolute; top: 0; left: 0; height: 100%; width: 0%; background: var(--gradient); animation: loadBar 1.5s cubic-bezier(0.7, 0, 0.3, 1) forwards; }
+        @keyframes loadBar { 0% { width: 0%; } 100% { width: 100%; } }
+        @keyframes pulseText { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
         #back-to-top {
-            position: fixed; bottom: 30px; right: 30px;
-            width: 45px; height: 45px; border-radius: 50%;
-            background: var(--gradient); color: white;
-            border: none; outline: none; cursor: pointer;
-            box-shadow: 0 5px 15px rgba(125, 95, 255, 0.4);
-            opacity: 0; visibility: hidden; transition: 0.3s;
+            position: fixed; bottom: 30px; right: 30px; width: 45px; height: 45px; border-radius: 50%;
+            background: var(--gradient); color: white; border: none; outline: none; cursor: pointer;
+            box-shadow: 0 5px 15px rgba(125, 95, 255, 0.4); opacity: 0; visibility: hidden; transition: 0.3s;
             z-index: 999; display: flex; align-items: center; justify-content: center;
         }
         #back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
@@ -125,33 +114,23 @@
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         .hero { height: 100vh; display: flex; align-items: center; justify-content: space-around; }
-        .hero-content { max-width: 600px; }
+        .hero-content { width: 100%; max-width: 600px; }
         .badge { background: rgba(125, 95, 255, 0.12); color: var(--accent-primary); padding: 7px 18px; border-radius: 25px; font-size: 0.8rem; font-weight: 700; margin-bottom: 25px; display: inline-block; border: 1px solid rgba(125, 95, 255, 0.2); }
         .hero h1 { font-size: 3.8rem; line-height: 1.1; margin-bottom: 20px; font-weight: 800; letter-spacing: -2px; }
         
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        .highlight {
-            background: linear-gradient(270deg, #7d5fff, #45aaf2, #ff7eb3, #7d5fff);
-            background-size: 300% 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            animation: gradientMove 6s ease infinite;
-        }
+        @keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .highlight { background: linear-gradient(270deg, #7d5fff, #45aaf2, #ff7eb3, #7d5fff); background-size: 300% 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: gradientMove 6s ease infinite; display: inline-block; transition: 0.3s ease; }
+        .highlight:hover { transform: scale(1.02) rotate(-1deg); text-shadow: 0 0 20px rgba(125, 95, 255, 0.6), 0 0 40px rgba(69, 170, 242, 0.4); cursor: none; }
 
         .btn-container { display: flex; gap: 15px; }
         .btn-primary, .btn-secondary { padding: 14px 32px; border-radius: 40px; text-decoration: none; font-weight: 700; font-size: 0.95rem; transition: 0.4s; display: inline-block; border: none; }
         .btn-primary { background: var(--gradient); color: white; cursor: pointer; }
-        .btn-primary:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 0 25px rgba(125, 95, 255, 0.6), 0 0 50px rgba(69, 170, 242, 0.4); }
+        .btn-primary:hover { box-shadow: 0 0 25px rgba(125, 95, 255, 0.6), 0 0 50px rgba(69, 170, 242, 0.4); }
         .btn-secondary { border: 2px solid var(--border-color); color: var(--text-main); }
-        .btn-secondary:hover { border-color: var(--accent-primary); transform: translateY(-8px); }
+        .btn-secondary:hover { border-color: var(--accent-primary); }
 
-        @keyframes float {
-            0% { transform: translateY(0px) rotate(4deg); }
-            50% { transform: translateY(-20px) rotate(2deg); }
-            100% { transform: translateY(0px) rotate(4deg); }
-        }
+        @keyframes float { 0% { transform: translateY(0px) rotate(4deg); } 50% { transform: translateY(-20px) rotate(2deg); } 100% { transform: translateY(0px) rotate(4deg); } }
+        .hero-image { transition: transform 0.2s ease-out; } /* Efek Parallax */
         .hero-image .image-card { width: 330px; height: 420px; background: var(--card-bg); border-radius: 40px; border: 1px solid var(--border-color); transform: rotate(4deg); overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.5); transition: 0.6s ease; animation: float 6s ease-in-out infinite; }
         .hero-image:hover .image-card { transform: rotate(0deg) scale(1.05); }
         .hero-image img { width: 100%; height: 100%; object-fit: cover; }
@@ -162,8 +141,13 @@
         .about-content { color: var(--text-dim); font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px; }
         
         .tools-logo-container { display: flex; gap: 20px; margin: 25px 0; align-items: center; flex-wrap: wrap; }
-        .tool-icon { width: 40px; height: 40px; object-fit: contain; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2)); cursor: pointer; }
-        .tool-icon:hover { transform: translateY(-8px) scale(1.15); filter: drop-shadow(0 8px 12px rgba(125, 95, 255, 0.4)); }
+        
+        /* --- FITUR BARU: GLASSMORPHISM TOOLTIPS --- */
+        .tool-wrapper { position: relative; display: inline-block; cursor: pointer; }
+        .tool-icon { width: 40px; height: 40px; object-fit: contain; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2)); }
+        .tool-wrapper:hover .tool-icon { transform: translateY(-8px) scale(1.15); filter: drop-shadow(0 8px 12px rgba(125, 95, 255, 0.4)); }
+        .tool-wrapper::after { content: attr(data-tooltip); position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%) translateY(0px); background: var(--nav-bg); color: var(--text-main); border: 1px solid var(--accent-primary); padding: 6px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; opacity: 0; visibility: hidden; transition: 0.3s ease; white-space: nowrap; backdrop-filter: blur(10px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); z-index: 10; }
+        .tool-wrapper:hover::after { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(-15px); }
 
         .stats-grid { display: flex; gap: 15px; margin-top: 30px; }
         .stat-card { background: var(--card-bg); padding: 20px; border-radius: 20px; border: 1px solid var(--border-color); flex: 1; min-height: 140px; text-align: center; transition: 0.4s; display: flex; flex-direction: column; align-items: center; justify-content: center; }
@@ -181,33 +165,26 @@
         .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
         .project-card { background: var(--card-bg); border-radius: 30px; overflow: hidden; border: 1px solid var(--border-color); transition: 0.5s; display: flex; flex-direction: column; }
         .project-card:hover { transform: translateY(-10px); border-color: var(--accent-primary); box-shadow: 0 15px 30px rgba(125, 95, 255, 0.15); }
-        
         .proj-img { height: 180px; width: 100%; background: rgba(28, 28, 42, 0.5); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--accent-primary); position: relative; overflow: hidden; }
         .proj-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
         .project-card:hover .proj-img img { transform: scale(1.1); }
         .proj-info { padding: 25px; flex: 1; display: flex; flex-direction: column; }
         .tag { color: var(--accent-secondary); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; display: block; margin-bottom: 10px; }
 
-        /* Pinterest Style Gallery */
         .big-gallery-frame { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 40px; padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); backdrop-filter: blur(15px); }
         .masonry-grid { column-count: 3; column-gap: 20px; }
         .gallery-item { display: block; margin-bottom: 20px; border-radius: 15px; overflow: hidden; border: 1px solid var(--border-color); transition: 0.4s; break-inside: avoid; background: rgba(255,255,255,0.03); position: relative; }
         .gallery-item img { width: 100%; display: block; height: auto; transition: 0.5s; }
-        
-        /* EFEK HOVER GALLERY BERTEKS */
         .gallery-item::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 80%; background: linear-gradient(to top, rgba(8,8,17,0.95), transparent); opacity: 0; transition: 0.4s; pointer-events: none; z-index: 1; }
         .gallery-info { position: absolute; bottom: 20px; left: 20px; right: 20px; z-index: 2; opacity: 0; transform: translateY(15px); transition: 0.4s; }
         .gallery-info h4 { color: white; font-size: 1.1rem; font-weight: 700; margin-bottom: 5px; line-height: 1.2; }
         .gallery-info p { color: var(--accent-secondary); font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; gap: 5px; }
-        
         .gallery-item:hover { transform: translateY(-5px); border-color: var(--accent-primary); box-shadow: 0 10px 25px rgba(125, 95, 255, 0.3); z-index: 10; }
         .gallery-item:hover img { transform: scale(1.05); }
         .gallery-item:hover::after { opacity: 1; }
         .gallery-item:hover .gallery-info { opacity: 1; transform: translateY(0); }
 
-        /* --- PREMIUM VIDEO SECTION CSS --- */
         .video-showcase { display: flex; flex-direction: column; gap: 50px; background: transparent; padding: 20px 0; }
-        
         .cinematic-wrapper { position: relative; padding: 20px; background: var(--card-bg); border-radius: 30px; border: 1px solid var(--border-color); box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
         .cinematic-wrapper::before { content: ''; position: absolute; top: -10px; left: -10px; right: -10px; bottom: -10px; background: var(--gradient); z-index: -1; border-radius: 35px; filter: blur(20px); opacity: 0.3; }
         .yt-container { position: relative; width: 100%; padding-bottom: 56.25%; border-radius: 20px; overflow: hidden; background: #000; }
@@ -218,19 +195,12 @@
         .reels-header h3 i { color: #E1306C; }
 
         .reels-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-        .custom-reel-card { 
-            position: relative; display: flex; flex-direction: column; justify-content: flex-end; 
-            height: 500px; border-radius: 30px; overflow: hidden; text-decoration: none; 
-            border: 1px solid var(--border-color); box-shadow: 0 20px 40px rgba(0,0,0,0.2); transition: 0.4s; 
-            -webkit-mask-image: -webkit-radial-gradient(white, black); transform: translateZ(0); isolation: isolate; 
-        }
+        .custom-reel-card { position: relative; display: flex; flex-direction: column; justify-content: flex-end; height: 500px; border-radius: 30px; overflow: hidden; text-decoration: none; border: 1px solid var(--border-color); box-shadow: 0 20px 40px rgba(0,0,0,0.2); transition: 0.4s; -webkit-mask-image: -webkit-radial-gradient(white, black); transform: translateZ(0); isolation: isolate; }
         .reel-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; transition: 0.5s; }
         .custom-reel-card:hover { transform: translateY(-10px); border-color: var(--accent-primary); box-shadow: 0 20px 40px rgba(125, 95, 255, 0.3); }
         .custom-reel-card:hover .reel-bg { transform: scale(1.05); }
-        
         .play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2; width: 60px; height: 60px; background: rgba(255,255,255,0.2); backdrop-filter: blur(5px); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; transition: 0.3s; border: 1px solid rgba(255,255,255,0.4); }
         .custom-reel-card:hover .play-btn { background: var(--accent-primary); border-color: var(--accent-primary); transform: translate(-50%, -50%) scale(1.1); }
-        
         .reel-content { position: relative; z-index: 2; padding: 30px 25px; }
         .reel-tag { font-size: 0.75rem; font-weight: 800; color: var(--accent-secondary); text-transform: uppercase; margin-bottom: 8px; display: block; }
         .reel-content h4 { color: white; font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; line-height: 1.3; }
@@ -262,61 +232,40 @@
 
         footer { text-align: center; padding: 30px 20px; border-top: 1px solid var(--border-color); color: var(--text-dim); font-size: 0.9rem; margin-top: 50px; }
 
-        /* =========================================
-           RESPONSIVE DESIGN (TABLET & MOBILE FIX)
-           ========================================= */
-        @media (hover: none) and (pointer: coarse) {
-            .magic-cursor { display: none !important; }
-        }
-
+        @media (hover: none) and (pointer: coarse) { .magic-cursor { display: none !important; } }
         @media (max-width: 992px) { 
-            .about-container { flex-direction: column; text-align: center; } 
-            .stats-grid { flex-direction: column; } 
-            .hero-image { display: none; } 
-            .tools-logo-container { justify-content: center; } 
-            .project-grid { grid-template-columns: repeat(2, 1fr); }
-            .contact-box { padding: 40px 25px; }
-            .masonry-grid { column-count: 2; } 
-            .reels-grid { grid-template-columns: repeat(2, 1fr); }
+            .about-container { flex-direction: column; text-align: center; } .stats-grid { flex-direction: column; } 
+            .hero-image { display: none; } .tools-logo-container { justify-content: center; } 
+            .project-grid { grid-template-columns: repeat(2, 1fr); } .contact-box { padding: 40px 25px; }
+            .masonry-grid { column-count: 2; } .reels-grid { grid-template-columns: repeat(2, 1fr); }
         }
-
         @media (max-width: 768px) {
             nav { flex-direction: column; padding: 15px; border-radius: 20px; gap: 10px; width: 95%; }
-            nav ul { flex-wrap: wrap; justify-content: center; gap: 8px; }
-            nav ul li a { font-size: 0.75rem; padding: 2px 5px; }
-            
+            nav ul { flex-wrap: wrap; justify-content: center; gap: 8px; } nav ul li a { font-size: 0.75rem; padding: 2px 5px; }
             section { padding: 100px 5% 40px; }
-            .hero { height: auto; padding-top: 150px; text-align: center; }
-            .hero-content { display: flex; flex-direction: column; align-items: center; }
+            .hero { height: auto; padding-top: 150px; text-align: center; } .hero-content { display: flex; flex-direction: column; align-items: center; }
             .hero h1 { font-size: 2.8rem; letter-spacing: -1px; line-height: 1.1; }
-            .btn-container { flex-direction: column; width: 100%; gap: 15px; }
-            .btn-primary, .btn-secondary { width: 100%; text-align: center; }
-            
-            .project-grid { grid-template-columns: 1fr; }
-            .big-gallery-frame { padding: 20px; border-radius: 25px; }
-            .masonry-grid { column-count: 2; column-gap: 10px; }
-            .gallery-item { margin-bottom: 10px; border-radius: 10px; }
-            
-            .section-title { font-size: 2rem; text-align: center; }
-            .timeline { padding-left: 20px; }
-            .timeline-item::before { left: -31px; }
+            .btn-container { flex-direction: column; width: 100%; gap: 15px; } .btn-primary, .btn-secondary { width: 100%; text-align: center; }
+            .project-grid { grid-template-columns: 1fr; } .big-gallery-frame { padding: 20px; border-radius: 25px; }
+            .masonry-grid { column-count: 2; column-gap: 10px; } .gallery-item { margin-bottom: 10px; border-radius: 10px; }
+            .section-title { font-size: 2rem; text-align: center; } .timeline { padding-left: 20px; } .timeline-item::before { left: -31px; }
             .about-image-wrapper { width: 100%; max-width: 300px; height: auto; aspect-ratio: 4/5; margin: 0 auto; }
-            
-            .video-showcase { padding: 20px 15px; gap: 30px; }
-            .reels-grid { grid-template-columns: 1fr; }
-            .custom-reel-card { height: 420px; } 
+            .video-showcase { padding: 20px 15px; gap: 30px; } .reels-grid { grid-template-columns: 1fr; } .custom-reel-card { height: 420px; } 
             .cinematic-wrapper { padding: 10px; border-radius: 20px; }
-            
-            .contact-box { padding: 40px 20px; }
-            .social-links-container { flex-direction: column; width: 100%; align-items: center;}
+            .contact-box { padding: 40px 20px; } .social-links-container { flex-direction: column; width: 100%; align-items: center;}
             .social-link-editorial { width: 100%; justify-content: center; max-width: 300px;}
-            
-            #scroll-progress { height: 3px; } 
-            #back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
+            #scroll-progress { height: 3px; } #back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
         }
     </style>
 </head>
 <body>
+    <div id="preloader">
+        <div class="loader-content">
+            <span class="loader-text">NADA FITRIA BERLIANA</span>
+            <div class="loader-bar"><div class="loader-progress"></div></div>
+        </div>
+    </div>
+    
     <div id="scroll-progress"></div>
     <div class="magic-cursor"></div>
     <button id="back-to-top" title="Go to top"><i class="fas fa-arrow-up"></i></button>
@@ -339,15 +288,14 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <div class="badge">Electrical Engineering Student</div>
-            <div class="hero-intro">
+         <div class="hero-intro">
                 <p id="greeting" style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.8rem; color: var(--accent-secondary); margin-bottom: 10px;">Hello,</p>
-                <h1 style="margin-top: 0; font-size: 4rem; line-height: 1.1;">
-                I'm <span class="highlight">Nada Fitria Berliana</span>
+                <h1 style="margin-top: 0; font-size: 3.4rem; line-height: 1.1; display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+                    <span>I'm</span> <span class="highlight">Nada Fitria Berliana</span>
                 </h1>
             </div>
             
-            <p id="typewriter-text" style="color: var(--text-dim); font-size: 1.2rem; margin-bottom: 40px; line-height: 1.6; min-height: 60px;"></p>
-            
+            <p id="typewriter-text" style="color: var(--text-dim); font-size: 1.2rem; margin-bottom: 25px; line-height: 1.6; min-height: 60px;"></p>
             <div class="btn-container">
                 <a href="#about" class="btn-primary">About Me</a>
                 <a href="#contact" class="btn-secondary">Connect With Me</a>
@@ -369,11 +317,21 @@
                 </div>
                 
                 <div class="tools-logo-container">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Figma" class="tool-icon" title="Figma">
-                    <img src="https://img.icons8.com/fluency/48/canva.png" alt="Canva" class="tool-icon" title="Canva">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg" alt="VS Code" class="tool-icon" title="VS Code">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b6/Adobe_Photoshop_Lightroom_CC_logo.svg" alt="Lightroom" class="tool-icon" title="Adobe Lightroom">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" alt="Photoshop" class="tool-icon" title="Adobe Photoshop">
+                    <div class="tool-wrapper" data-tooltip="UI/UX Prototyping">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Figma" class="tool-icon">
+                    </div>
+                    <div class="tool-wrapper" data-tooltip="Visual Content Creation">
+                        <img src="https://img.icons8.com/fluency/48/canva.png" alt="Canva" class="tool-icon">
+                    </div>
+                    <div class="tool-wrapper" data-tooltip="Web Development">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg" alt="VS Code" class="tool-icon">
+                    </div>
+                    <div class="tool-wrapper" data-tooltip="Color Grading">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b6/Adobe_Photoshop_Lightroom_CC_logo.svg" alt="Lightroom" class="tool-icon">
+                    </div>
+                    <div class="tool-wrapper" data-tooltip="Graphic Editing">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" alt="Photoshop" class="tool-icon">
+                    </div>
                 </div>
 
                 <div class="stats-grid">
@@ -642,16 +600,39 @@
     </footer>
 
     <script>
-        // Theme Toggle
+        // --- Cinematic Preloader ---
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('preloader').classList.add('hide');
+            }, 1500); 
+        });
+
+        // --- Theme Toggle with Memory ---
         const themeToggle = document.getElementById('theme-toggle');
         const themeIcon = themeToggle.querySelector('i');
+        
+        if (localStorage.getItem('nada_theme') === 'light') {
+            document.body.classList.add('light-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+
         themeToggle.addEventListener('click', () => {
             document.body.classList.toggle('light-mode');
-            themeIcon.classList.toggle('fa-moon');
-            themeIcon.classList.toggle('fa-sun');
+            const isLight = document.body.classList.contains('light-mode');
+            
+            if (isLight) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('nada_theme', 'light'); 
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('nada_theme', 'dark'); 
+            }
         });
         
-        // Scroll Reveal
+        // --- Scroll Reveal ---
         function reveal() {
             var reveals = document.querySelectorAll(".reveal");
             for (var i = 0; i < reveals.length; i++) {
@@ -663,7 +644,7 @@
         window.addEventListener("scroll", reveal);
         reveal();
 
-        // Scroll Progress Bar
+        // --- Scroll Progress Bar ---
         window.addEventListener('scroll', () => {
             const scrollPx = document.documentElement.scrollTop;
             const winHeightPx = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -671,7 +652,7 @@
             document.getElementById('scroll-progress').style.width = scrolled;
         });
 
-        // Typewriter Effect
+        // --- Typewriter Effect ---
         const typeText = "Electrical Engineering Student at UPNVJ Exploring IoT, Research, and Digital Design.";
         const typeElement = document.getElementById('typewriter-text');
         let typeIndex = 0;
@@ -682,9 +663,17 @@
                 setTimeout(typeWriter, 40); 
             }
         }
-        setTimeout(typeWriter, 1000); 
+        setTimeout(typeWriter, 1600); 
 
-        // 3D Hover Effect
+        // --- 3D Mouse Parallax (Hero Section) ---
+        const heroImgContainer = document.querySelector('.hero-image');
+        window.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth / 2 - e.clientX) / 30;
+            const y = (window.innerHeight / 2 - e.clientY) / 30;
+            heroImgContainer.style.transform = `translate(${x}px, ${y}px)`;
+        });
+
+        // --- 3D Hover Effect Cards ---
         const cards = document.querySelectorAll('.project-card, .achievement-card, .custom-reel-card');
         cards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
@@ -707,7 +696,7 @@
             });
         });
 
-        // --- SCRIPT MAGIC CURSOR ---
+        // --- Script Magic Cursor ---
         const cursor = document.querySelector('.magic-cursor');
 
         window.addEventListener('mousemove', (e) => {
@@ -749,7 +738,7 @@
             zone.addEventListener('mouseleave', () => cursor.classList.remove('hidden-cursor'));
         });
 
-        // --- MAGNETIC BUTTONS ---
+        // --- Magnetic Buttons ---
         const magnetBtns = document.querySelectorAll('.btn-primary, .btn-secondary');
         magnetBtns.forEach(btn => {
             btn.addEventListener('mousemove', (e) => {
@@ -763,7 +752,7 @@
             });
         });
 
-        // --- SMART BACK TO TOP BUTTON ---
+        // --- Smart Back to Top Button ---
         const backToTop = document.getElementById('back-to-top');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 300) {
@@ -778,7 +767,23 @@
         backToTop.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
         backToTop.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
 
-        // Automatic Time Greeting Script
+        // --- Dynamic Tab Title (Easter Egg) ---
+        let docTitle = document.title;
+        window.addEventListener("blur", () => {
+            document.title = "✨ Wait, come back!";
+        });
+        window.addEventListener("focus", () => {
+            document.title = docTitle;
+        });
+
+        // --- Secret Console Message (Easter Egg) ---
+        console.log(
+            "%cSTOP RIGHT THERE! 🛑\n%cLooking for a dedicated Head of Media? You found her.\nLet's collaborate: nadaftrberliana@gmail.com",
+            "color: #7d5fff; font-size: 24px; font-weight: 800; font-family: sans-serif; text-shadow: 0 0 10px rgba(125,95,255,0.5); padding: 10px 0;",
+            "color: #45aaf2; font-size: 14px; font-family: monospace; padding-bottom: 10px;"
+        );
+
+        // --- Automatic Time Greeting ---
         const greetingElement = document.getElementById('greeting');
         const hour = new Date().getHours();
         
