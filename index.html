@@ -90,13 +90,12 @@
             background-color: rgba(125, 95, 255, 0.4); 
             border: 1px solid var(--accent-primary); 
         }
-        /* Kursor hilang instan tanpa delay */
         .magic-cursor.hidden-cursor {
             opacity: 0 !important;
             transition: opacity 0s !important; 
         }
 
-        /* --- Back to Top Button --- */
+        /* --- FITUR BARU: Back to Top Button --- */
         #back-to-top {
             position: fixed; bottom: 30px; right: 30px;
             width: 45px; height: 45px; border-radius: 50%;
@@ -194,12 +193,17 @@
         .masonry-grid { column-count: 3; column-gap: 20px; }
         .gallery-item { display: block; margin-bottom: 20px; border-radius: 15px; overflow: hidden; border: 1px solid var(--border-color); transition: 0.4s; break-inside: avoid; background: rgba(255,255,255,0.03); position: relative; }
         .gallery-item img { width: 100%; display: block; height: auto; transition: 0.5s; }
-        .gallery-item::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: 0.4s; pointer-events: none; }
-        .gallery-icon { position: absolute; bottom: 15px; right: 15px; color: white; font-size: 1.2rem; opacity: 0; transform: translateY(10px); transition: 0.4s; z-index: 2; }
+        
+        /* EFEK HOVER GALLERY BERTEKS */
+        .gallery-item::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 80%; background: linear-gradient(to top, rgba(8,8,17,0.95), transparent); opacity: 0; transition: 0.4s; pointer-events: none; z-index: 1; }
+        .gallery-info { position: absolute; bottom: 20px; left: 20px; right: 20px; z-index: 2; opacity: 0; transform: translateY(15px); transition: 0.4s; }
+        .gallery-info h4 { color: white; font-size: 1.1rem; font-weight: 700; margin-bottom: 5px; line-height: 1.2; }
+        .gallery-info p { color: var(--accent-secondary); font-size: 0.8rem; font-weight: 600; display: flex; align-items: center; gap: 5px; }
+        
         .gallery-item:hover { transform: translateY(-5px); border-color: var(--accent-primary); box-shadow: 0 10px 25px rgba(125, 95, 255, 0.3); z-index: 10; }
         .gallery-item:hover img { transform: scale(1.05); }
         .gallery-item:hover::after { opacity: 1; }
-        .gallery-item:hover .gallery-icon { opacity: 1; transform: translateY(0); }
+        .gallery-item:hover .gallery-info { opacity: 1; transform: translateY(0); }
 
         /* --- PREMIUM VIDEO SECTION CSS --- */
         .video-showcase { display: flex; flex-direction: column; gap: 50px; background: transparent; padding: 20px 0; }
@@ -261,6 +265,10 @@
         /* =========================================
            RESPONSIVE DESIGN (TABLET & MOBILE FIX)
            ========================================= */
+        @media (hover: none) and (pointer: coarse) {
+            .magic-cursor { display: none !important; }
+        }
+
         @media (max-width: 992px) { 
             .about-container { flex-direction: column; text-align: center; } 
             .stats-grid { flex-direction: column; } 
@@ -271,27 +279,40 @@
             .masonry-grid { column-count: 2; } 
             .reels-grid { grid-template-columns: repeat(2, 1fr); }
         }
+
         @media (max-width: 768px) {
             nav { flex-direction: column; padding: 15px; border-radius: 20px; gap: 10px; width: 95%; }
-            nav ul { flex-wrap: wrap; justify-content: center; gap: 10px; }
-            nav ul li a { font-size: 0.8rem; }
+            nav ul { flex-wrap: wrap; justify-content: center; gap: 8px; }
+            nav ul li a { font-size: 0.75rem; padding: 2px 5px; }
+            
             section { padding: 100px 5% 40px; }
             .hero { height: auto; padding-top: 150px; text-align: center; }
             .hero-content { display: flex; flex-direction: column; align-items: center; }
-            .hero h1 { font-size: 2.5rem; letter-spacing: -1px; }
+            .hero h1 { font-size: 2.8rem; letter-spacing: -1px; line-height: 1.1; }
             .btn-container { flex-direction: column; width: 100%; gap: 15px; }
             .btn-primary, .btn-secondary { width: 100%; text-align: center; }
+            
             .project-grid { grid-template-columns: 1fr; }
             .big-gallery-frame { padding: 20px; border-radius: 25px; }
             .masonry-grid { column-count: 2; column-gap: 10px; }
             .gallery-item { margin-bottom: 10px; border-radius: 10px; }
+            
             .section-title { font-size: 2rem; text-align: center; }
             .timeline { padding-left: 20px; }
             .timeline-item::before { left: -31px; }
             .about-image-wrapper { width: 100%; max-width: 300px; height: auto; aspect-ratio: 4/5; margin: 0 auto; }
+            
+            .video-showcase { padding: 20px 15px; gap: 30px; }
+            .reels-grid { grid-template-columns: 1fr; }
+            .custom-reel-card { height: 420px; } 
+            .cinematic-wrapper { padding: 10px; border-radius: 20px; }
+            
+            .contact-box { padding: 40px 20px; }
             .social-links-container { flex-direction: column; width: 100%; align-items: center;}
             .social-link-editorial { width: 100%; justify-content: center; max-width: 300px;}
-            .reels-grid { grid-template-columns: 1fr; }
+            
+            #scroll-progress { height: 3px; } 
+            #back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
         }
     </style>
 </head>
@@ -413,29 +434,47 @@
         <div class="big-gallery-frame">
             <div class="masonry-grid">
                 
-                <a href="https://www.instagram.com/p/DVDRsqSAHTa/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="gallery-item">
+                <a href="https://www.instagram.com/p/DVDRsqSAHTa/" target="_blank" class="gallery-item">
                     <img src="images/gallery1.png" alt="Design 1">
-                    <i class="fab fa-instagram gallery-icon"></i>
+                    <div class="gallery-info">
+                        <h4>KSM IoT Grand Branding</h4>
+                        <p>View on Instagram <i class="fas fa-arrow-right"></i></p>
+                    </div>
                 </a>
-                <a href="https://www.instagram.com/p/DTNEPBEEazg/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="gallery-item">
+                <a href="https://www.instagram.com/p/DTNEPBEEazg/" target="_blank" class="gallery-item">
                     <img src="images/gallery2.png" alt="Design 2">
-                    <i class="fab fa-instagram gallery-icon"></i>
+                    <div class="gallery-info">
+                        <h4>LokaSehat Infographic</h4>
+                        <p>View on Instagram <i class="fas fa-arrow-right"></i></p>
+                    </div>
                 </a>
-                <a href="https://www.instagram.com/p/DS4p_9OEYB8/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="gallery-item">
+                <a href="https://www.instagram.com/p/DS4p_9OEYB8/" target="_blank" class="gallery-item">
                     <img src="images/gallery3.png" alt="Design 3">
-                    <i class="fab fa-instagram gallery-icon"></i>
+                    <div class="gallery-info">
+                        <h4>I-VISIT Collaboration</h4>
+                        <p>View on Instagram <i class="fas fa-arrow-right"></i></p>
+                    </div>
                 </a>
-                <a href="https://www.instagram.com/p/DMNCzpNxAZn/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="gallery-item">
+                <a href="https://www.instagram.com/p/DMNCzpNxAZn/" target="_blank" class="gallery-item">
                     <img src="images/gallery4.png" alt="Design 4">
-                    <i class="fab fa-instagram gallery-icon"></i>
+                    <div class="gallery-info">
+                        <h4>Event Key Visual</h4>
+                        <p>View on Instagram <i class="fas fa-arrow-right"></i></p>
+                    </div>
                 </a>
-                <a href="https://www.instagram.com/p/DJnkmoVTNY8/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="gallery-item">
+                <a href="https://www.instagram.com/p/DJnkmoVTNY8/" target="_blank" class="gallery-item">
                     <img src="images/gallery5.png" alt="Design 5">
-                    <i class="fab fa-instagram gallery-icon"></i>
+                    <div class="gallery-info">
+                        <h4>Social Media Campaign</h4>
+                        <p>View on Instagram <i class="fas fa-arrow-right"></i></p>
+                    </div>
                 </a>
-                <a href="https://www.instagram.com/p/DRB4IFCkZ-F/?utm_source=ig_web_copy_link" target="_blank" class="gallery-item">
+                <a href="https://www.instagram.com/p/DRB4IFCkZ-F/" target="_blank" class="gallery-item">
                     <img src="images/gallery6.png" alt="Design 6">
-                    <i class="fab fa-instagram gallery-icon"></i>
+                    <div class="gallery-info">
+                        <h4>Creative Publication</h4>
+                        <p>View on Instagram <i class="fas fa-arrow-right"></i></p>
+                    </div>
                 </a>
             </div>
         </div>
@@ -668,14 +707,13 @@
             });
         });
 
-        // --- SCRIPT MAGIC CURSOR (SUPER FIX: INSTANT HIDE) ---
+        // --- SCRIPT MAGIC CURSOR ---
         const cursor = document.querySelector('.magic-cursor');
 
         window.addEventListener('mousemove', (e) => {
             cursor.style.left = `${e.clientX}px`;
             cursor.style.top = `${e.clientY}px`;
 
-            // Sembunyikan instan kalau kena scrollbar kanan/bawah
             if (e.clientX >= window.innerWidth - 20 || e.clientY >= window.innerHeight - 20) {
                 cursor.classList.add('hidden-cursor');
             } else {
@@ -683,7 +721,6 @@
             }
         });
 
-        // Sembunyikan instan kalau mouse keluar jendela browser
         document.addEventListener('mouseout', (e) => {
             if (e.relatedTarget === null) { cursor.classList.add('hidden-cursor'); }
         });
@@ -706,13 +743,40 @@
             });
         });
 
-        // ANTI-STUCK YOUTUBE: Sembunyikan instan sebelum nabrak iframe
         const iframeZones = document.querySelectorAll('.iframe-zone');
         iframeZones.forEach(zone => {
             zone.addEventListener('mouseenter', () => cursor.classList.add('hidden-cursor'));
             zone.addEventListener('mouseleave', () => cursor.classList.remove('hidden-cursor'));
         });
-        // --- BATAS SCRIPT MAGIC CURSOR ---
+
+        // --- MAGNETIC BUTTONS ---
+        const magnetBtns = document.querySelectorAll('.btn-primary, .btn-secondary');
+        magnetBtns.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.05)`;
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = `translate(0px, 0px) scale(1)`;
+            });
+        });
+
+        // --- SMART BACK TO TOP BUTTON ---
+        const backToTop = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        backToTop.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+        backToTop.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
 
         // Automatic Time Greeting Script
         const greetingElement = document.getElementById('greeting');
@@ -727,42 +791,6 @@
             greetingText = 'Good Evening,';
         }
         greetingElement.innerText = greetingText;
-
-
-        // --- MAGNETIC BUTTONS ---
-        const magnetBtns = document.querySelectorAll('.btn-primary, .btn-secondary');
-        magnetBtns.forEach(btn => {
-            btn.addEventListener('mousemove', (e) => {
-                const rect = btn.getBoundingClientRect();
-                const x = e.clientX - rect.left - rect.width / 2;
-                const y = e.clientY - rect.top - rect.height / 2;
-                // Tombol akan bergerak sedikit mengikuti arah kursor
-                btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px) scale(1.05)`;
-            });
-            btn.addEventListener('mouseleave', () => {
-                // Tombol kembali ke posisi semula kalau kursor pergi
-                btn.style.transform = `translate(0px, 0px) scale(1)`;
-            });
-        });
-
-        // --- Smart Back to Top Button ---
-        const backToTop = document.getElementById('back-to-top');
-        window.addEventListener('scroll', () => {
-            // Tombol muncul kalau udah scroll lebih dari 300px
-            if (window.scrollY > 300) {
-                backToTop.classList.add('show');
-            } else {
-                backToTop.classList.remove('show');
-            }
-        });
-        backToTop.addEventListener('click', () => {
-            // Animasi scroll mulus ke atas
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-        
-        // Kursor buatan membesar saat kena tombol Back to Top
-        backToTop.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
-        backToTop.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
 
     </script>
 </body>
