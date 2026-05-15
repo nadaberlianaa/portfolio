@@ -148,6 +148,10 @@
         .tool-wrapper:hover .tool-icon { transform: translateY(-8px) scale(1.15); filter: drop-shadow(0 8px 12px rgba(125, 95, 255, 0.4)); }
         .tool-wrapper::after { content: attr(data-tooltip); position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%) translateY(0px); background: var(--nav-bg); color: var(--text-main); border: 1px solid var(--accent-primary); padding: 6px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; opacity: 0; visibility: hidden; transition: 0.3s ease; white-space: nowrap; backdrop-filter: blur(10px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); z-index: 10; }
         .tool-wrapper:hover::after { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(-15px); }
+        .icon-capcut { filter: invert(1); }
+        .light-mode .icon-capcut { filter: invert(0); }
+        .tool-wrapper:hover .icon-capcut { filter: invert(1) drop-shadow(0 8px 12px rgba(125, 95, 255, 0.4)); }
+        .light-mode .tool-wrapper:hover .icon-capcut { filter: invert(0) drop-shadow(0 8px 12px rgba(125, 95, 255, 0.4)); }
 
         .stats-grid { display: flex; gap: 15px; margin-top: 30px; }
         .stat-card { background: var(--card-bg); padding: 20px; border-radius: 20px; border: 1px solid var(--border-color); flex: 1; min-height: 140px; text-align: center; transition: 0.4s; display: flex; flex-direction: column; align-items: center; justify-content: center; }
@@ -332,6 +336,9 @@
                     <div class="tool-wrapper" data-tooltip="Graphic Editing">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" alt="Photoshop" class="tool-icon">
                     </div>
+                   <div class="tool-wrapper" data-tooltip="Video Editing">
+                        <img src="https://www.svgrepo.com/show/504203/capcut.svg" alt="CapCut" class="tool-icon icon-capcut">
+                    </div>
                 </div>
 
                 <div class="stats-grid">
@@ -395,14 +402,14 @@
                 <a href="https://www.instagram.com/p/DVDRsqSAHTa/" target="_blank" class="gallery-item">
                     <img src="images/gallery1.png" alt="Design 1">
                     <div class="gallery-info">
-                        <h4>KSM IoT Grand Branding</h4>
+                        <h4>Hybrid Carousel Cover</h4>
                         <p>View on Instagram <i class="fas fa-arrow-right"></i></p>
                     </div>
                 </a>
                 <a href="https://www.instagram.com/p/DTNEPBEEazg/" target="_blank" class="gallery-item">
                     <img src="images/gallery2.png" alt="Design 2">
                     <div class="gallery-info">
-                        <h4>Hybrid Carousel Cover</h4>
+                        <h4>UI-Style Infographic</h4>
                         <p>View on Instagram <i class="fas fa-arrow-right"></i></p>
                     </div>
                 </a>
