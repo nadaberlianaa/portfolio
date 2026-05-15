@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nada Fitria Berliana | Portfolio</title>
+    <link rel="icon" href="https://img.icons8.com/fluency/48/domain.png" type="image/png">
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
@@ -79,13 +81,32 @@
         .magic-cursor.no-invert { mix-blend-mode: normal; background-color: rgba(125, 95, 255, 0.4); border: 1px solid var(--accent-primary); }
         .magic-cursor.hidden-cursor { opacity: 0 !important; transition: opacity 0s !important; }
 
-        #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: var(--bg-color); z-index: 9999999; display: flex; align-items: center; justify-content: center; transition: opacity 0.8s ease, visibility 0.8s ease; }
-        #preloader.hide { opacity: 0; visibility: hidden; }
+        /* --- FITUR: Loading Preloader Ala Hacker/IoT --- */
+        #preloader { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh; 
+            background: var(--bg-color); z-index: 9999999; 
+            display: flex; align-items: center; justify-content: center; 
+            transition: transform 0.9s cubic-bezier(0.7, 0, 0.3, 1), border-radius 0.9s ease; 
+        }
+        #preloader.hide { 
+            transform: translateY(-100%); 
+            border-bottom-left-radius: 50%; 
+            border-bottom-right-radius: 50%; 
+        }
         .loader-content { text-align: center; }
-        .loader-text { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--text-main); letter-spacing: 4px; margin-bottom: 20px; display: block; animation: pulseText 1.5s infinite; }
-        .loader-bar { width: 250px; height: 2px; background: rgba(255,255,255,0.1); margin: 0 auto; overflow: hidden; position: relative; }
-        .loader-progress { position: absolute; top: 0; left: 0; height: 100%; width: 0%; background: var(--gradient); animation: loadBar 1.5s cubic-bezier(0.7, 0, 0.3, 1) forwards; }
-        @keyframes loadBar { 0% { width: 0%; } 100% { width: 100%; } }
+        .loader-percent { 
+            font-family: 'Playfair Display', serif; font-size: 4.5rem; 
+            font-weight: 700; color: var(--accent-primary); 
+            margin-bottom: 5px; display: block; 
+        }
+        .loader-text { 
+            font-family: 'Inter', sans-serif; font-size: 0.9rem; 
+            font-weight: 700; color: var(--text-dim); letter-spacing: 6px; 
+            text-transform: uppercase; margin-bottom: 25px; display: block; 
+            animation: pulseText 1.5s infinite; 
+        }
+        .loader-bar { width: 250px; height: 3px; background: rgba(255,255,255,0.1); margin: 0 auto; overflow: hidden; position: relative; border-radius: 5px; }
+        .loader-progress { position: absolute; top: 0; left: 0; height: 100%; width: 0%; background: var(--gradient); transition: width 0.15s ease-out; border-radius: 5px; }
         @keyframes pulseText { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
         #back-to-top {
@@ -97,15 +118,43 @@
         #back-to-top.show { opacity: 1; visibility: visible; transform: translateY(0); }
         #back-to-top:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(69, 170, 242, 0.5); }
 
+        /* --- JURUS PAMUNGKAS: NAVBAR ANIMASI DOMINO (JS TRIGGERED) --- */
         nav {
-            position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 1150px;
+            position: fixed; left: 50%; transform: translateX(-50%); width: 90%; max-width: 1150px;
             background: var(--nav-bg); backdrop-filter: blur(15px); padding: 12px 30px; border-radius: 50px;
             display: flex; justify-content: space-between; align-items: center; z-index: 1000; border: 1px solid var(--border-color);
+            opacity: 0; top: -50px; 
+            transition: top 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.7s ease;
         }
-        .logo { font-weight: 800; font-size: 1.2rem; }
+        /* Saat class .nav-active ditambah dari JS, Navbar Turun */
+        nav.nav-active { opacity: 1; top: 20px; }
+        
+        .logo, nav ul li {
+            opacity: 0; transform: translateY(-30px);
+            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.6s ease;
+        }
+
+        .logo { 
+            font-weight: 800; 
+            font-size: 1.2rem; 
+        }
+        
+        nav.nav-active .logo { transition-delay: 0.1s; opacity: 1; transform: translateY(0); }
+        nav.nav-active ul li:nth-child(1) { transition-delay: 0.25s; opacity: 1; transform: translateY(0); }
+        nav.nav-active ul li:nth-child(2) { transition-delay: 0.4s; opacity: 1; transform: translateY(0); }
+        nav.nav-active ul li:nth-child(3) { transition-delay: 0.55s; opacity: 1; transform: translateY(0); }
+        nav.nav-active ul li:nth-child(4) { transition-delay: 0.7s; opacity: 1; transform: translateY(0); }
+        nav.nav-active ul li:nth-child(5) { transition-delay: 0.85s; opacity: 1; transform: translateY(0); }
+        nav.nav-active ul li:nth-child(6) { transition-delay: 1.0s; opacity: 1; transform: translateY(0); }
+        nav.nav-active ul li:nth-child(7) { transition-delay: 1.15s; opacity: 1; transform: translateY(0); }
+        nav.nav-active ul li:nth-child(8) { transition-delay: 1.3s; opacity: 1; transform: translateY(0); }
+        nav.nav-active ul li:nth-child(9) { transition-delay: 1.45s; opacity: 1; transform: translateY(0); }
+
         nav ul { display: flex; list-style: none; gap: 15px; align-items: center; }
-        nav ul li a { text-decoration: none; color: var(--text-main); font-size: 0.85rem; font-weight: 600; opacity: 0.7; transition: 0.3s; }
-        nav ul li a:hover { opacity: 1; color: var(--accent-primary); }
+        nav ul li a { text-decoration: none; color: var(--text-main); font-size: 0.85rem; font-weight: 600; opacity: 0.7; transition: 0.3s; display: inline-block; }
+        nav ul li a:hover { opacity: 1; color: var(--accent-primary); transform: translateY(-2px); }
+        nav ul li a.active { color: var(--accent-primary); font-weight: 800; opacity: 1; }
+
         #theme-toggle { background: var(--gradient); border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; color: white; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
 
         section { padding: 60px 10%; }
@@ -114,9 +163,9 @@
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         .hero { height: 100vh; display: flex; align-items: center; justify-content: space-around; }
-        .hero-content { width: 100%; max-width: 600px; }
+        .hero-content { width: 100%; max-width: 750px; } 
+        
         .badge { background: rgba(125, 95, 255, 0.12); color: var(--accent-primary); padding: 7px 18px; border-radius: 25px; font-size: 0.8rem; font-weight: 700; margin-bottom: 25px; display: inline-block; border: 1px solid rgba(125, 95, 255, 0.2); }
-        .hero h1 { font-size: 3.8rem; line-height: 1.1; margin-bottom: 20px; font-weight: 800; letter-spacing: -2px; }
         
         @keyframes gradientMove { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         .highlight { background: linear-gradient(270deg, #7d5fff, #45aaf2, #ff7eb3, #7d5fff); background-size: 300% 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: gradientMove 6s ease infinite; display: inline-block; transition: 0.3s ease; }
@@ -130,7 +179,7 @@
         .btn-secondary:hover { border-color: var(--accent-primary); }
 
         @keyframes float { 0% { transform: translateY(0px) rotate(4deg); } 50% { transform: translateY(-20px) rotate(2deg); } 100% { transform: translateY(0px) rotate(4deg); } }
-        .hero-image { transition: transform 0.2s ease-out; } /* Efek Parallax */
+        .hero-image { transition: transform 0.2s ease-out; } 
         .hero-image .image-card { width: 330px; height: 420px; background: var(--card-bg); border-radius: 40px; border: 1px solid var(--border-color); transform: rotate(4deg); overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.5); transition: 0.6s ease; animation: float 6s ease-in-out infinite; }
         .hero-image:hover .image-card { transform: rotate(0deg) scale(1.05); }
         .hero-image img { width: 100%; height: 100%; object-fit: cover; }
@@ -142,12 +191,12 @@
         
         .tools-logo-container { display: flex; gap: 20px; margin: 25px 0; align-items: center; flex-wrap: wrap; }
         
-        /* --- FITUR BARU: GLASSMORPHISM TOOLTIPS --- */
         .tool-wrapper { position: relative; display: inline-block; cursor: pointer; }
         .tool-icon { width: 40px; height: 40px; object-fit: contain; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2)); }
         .tool-wrapper:hover .tool-icon { transform: translateY(-8px) scale(1.15); filter: drop-shadow(0 8px 12px rgba(125, 95, 255, 0.4)); }
         .tool-wrapper::after { content: attr(data-tooltip); position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%) translateY(0px); background: var(--nav-bg); color: var(--text-main); border: 1px solid var(--accent-primary); padding: 6px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; opacity: 0; visibility: hidden; transition: 0.3s ease; white-space: nowrap; backdrop-filter: blur(10px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); z-index: 10; }
         .tool-wrapper:hover::after { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(-15px); }
+        
         .icon-capcut { filter: invert(1); }
         .light-mode .icon-capcut { filter: invert(0); }
         .tool-wrapper:hover .icon-capcut { filter: invert(1) drop-shadow(0 8px 12px rgba(125, 95, 255, 0.4)); }
@@ -230,11 +279,58 @@
         .contact-box::before { content: ''; position: absolute; top: -50px; left: -50px; width: 250px; height: 250px; background: var(--glow-primary); filter: blur(60px); border-radius: 50%; pointer-events: none; z-index: 0; }
         .contact-content { z-index: 1; max-width: 700px; }
         .social-links-container { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-top: 20px; z-index: 1; }
-        .social-link-editorial { color: var(--text-main); text-decoration: none; display: inline-flex; align-items: center; gap: 10px; font-weight: 600; font-size: 1.05rem; padding: 12px 25px; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 30px; transition: 0.3s; }
-        .social-link-editorial:hover { background: rgba(125, 95, 255, 0.15); border-color: var(--accent-primary); transform: translateY(-5px); box-shadow: 0 10px 20px rgba(125, 95, 255, 0.2); }
-        .social-link-editorial i { color: var(--accent-secondary); font-size: 1.2rem; }
+        .contact-cta {
+            font-family: 'Playfair Display', serif; font-size: 1.8rem; font-style: italic; 
+            background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+            font-weight: 700; margin-bottom: 0; /* FIX GAP: Margin bawah dihapus biar merapat */
+        }
+        
+        .social-links-container { 
+            display: flex; gap: 15px; flex-wrap: wrap; justify-content: center; 
+            margin-top: 0; z-index: 1; /* FIX GAP: Margin atas dihapus */
+        }
+        
+        /* Bento/Apple UI (Rounded Rectangle) */
+        .social-link-editorial { 
+            color: var(--text-main); text-decoration: none; display: inline-flex; align-items: center; gap: 10px; 
+            font-weight: 600; font-size: 1.05rem; padding: 14px 30px; background: rgba(255,255,255,0.03); 
+            border: 1px solid var(--border-color); border-radius: 18px; transition: 0.4s; position: relative; overflow: hidden; z-index: 1;
+        }
+        .social-link-editorial::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 0%; height: 100%;
+            background: var(--gradient); transition: 0.4s ease; z-index: -1; border-radius: 18px;
+        }
+        .social-link-editorial:hover::before { width: 100%; }
+        .social-link-editorial:hover { color: white; border-color: transparent; transform: translateY(-5px); box-shadow: 0 10px 25px rgba(125, 95, 255, 0.4); }
+        .social-link-editorial:hover i { color: white; transform: scale(1.2); transition: 0.3s; }
+        
+        .signature-text {
+            font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; color: var(--text-main); 
+            line-height: 1.2; position: relative; display: inline-block; cursor: default;
+        }
+        .signature-text::after {
+            content: ''; position: absolute; bottom: 8px; left: 0; width: 100%; height: 4px; 
+            background: var(--gradient); border-radius: 2px; opacity: 0.5; z-index: -1; transition: 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .signature-text:hover::after { height: 15px; opacity: 0.9; bottom: 4px; }
 
-        footer { text-align: center; padding: 30px 20px; border-top: 1px solid var(--border-color); color: var(--text-dim); font-size: 0.9rem; margin-top: 50px; }
+        footer { 
+            text-align: center; padding: 30px 20px; border-top: 1px solid var(--border-color); 
+            color: var(--text-dim); font-size: 0.9rem; margin-top: 50px; 
+        }
+
+        /* --- Animasi Fade Up Hero --- */
+        @keyframes fadeUpEntrance {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-element { opacity: 0; } 
+        .hero-loaded .hero-element { animation: fadeUpEntrance 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+        .hero-loaded .delay-1 { animation-delay: 0.1s; }
+        .hero-loaded .delay-2 { animation-delay: 0.3s; }
+        .hero-loaded .delay-3 { animation-delay: 0.5s; }
+        .hero-loaded .delay-4 { animation-delay: 0.7s; }
+        .hero-loaded .delay-5 { animation-delay: 0.9s; }
 
         @media (hover: none) and (pointer: coarse) { .magic-cursor { display: none !important; } }
         @media (max-width: 992px) { 
@@ -248,7 +344,9 @@
             nav ul { flex-wrap: wrap; justify-content: center; gap: 8px; } nav ul li a { font-size: 0.75rem; padding: 2px 5px; }
             section { padding: 100px 5% 40px; }
             .hero { height: auto; padding-top: 150px; text-align: center; } .hero-content { display: flex; flex-direction: column; align-items: center; }
-            .hero h1 { font-size: 2.8rem; letter-spacing: -1px; line-height: 1.1; }
+            
+            .hero h1 { justify-content: center; text-align: center; }
+            
             .btn-container { flex-direction: column; width: 100%; gap: 15px; } .btn-primary, .btn-secondary { width: 100%; text-align: center; }
             .project-grid { grid-template-columns: 1fr; } .big-gallery-frame { padding: 20px; border-radius: 25px; }
             .masonry-grid { column-count: 2; column-gap: 10px; } .gallery-item { margin-bottom: 10px; border-radius: 10px; }
@@ -265,7 +363,8 @@
 <body>
     <div id="preloader">
         <div class="loader-content">
-            <span class="loader-text">NADA FITRIA BERLIANA</span>
+            <span class="loader-percent" id="loader-percent">0%</span>
+            <span class="loader-text">Initializing Portfolio...</span>
             <div class="loader-bar"><div class="loader-progress"></div></div>
         </div>
     </div>
@@ -291,21 +390,25 @@
 
     <section id="home" class="hero">
         <div class="hero-content">
-            <div class="badge">Electrical Engineering Student</div>
-         <div class="hero-intro">
-                <p id="greeting" style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.8rem; color: var(--accent-secondary); margin-bottom: 10px;">Hello,</p>
-                <h1 style="margin-top: 0; font-size: 3.4rem; line-height: 1.1; display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+            <div class="badge hero-element delay-1">Electrical Engineering Student</div>
+        <div class="hero-intro hero-element delay-2">
+                <p id="greeting" style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.8rem; color: var(--accent-secondary); margin-bottom: 18px;">Hello,</p>
+                
+                <h1 style="margin-top: 0; margin-bottom: 25px; font-size: clamp(2.5rem, 4vw, 3.4rem); line-height: 1.1; display: flex; align-items: center; gap: 15px;">
                     <span>I'm</span> <span class="highlight">Nada Fitria Berliana</span>
                 </h1>
             </div>
             
-            <p id="typewriter-text" style="color: var(--text-dim); font-size: 1.2rem; margin-bottom: 25px; line-height: 1.6; min-height: 60px;"></p>
-            <div class="btn-container">
-                <a href="#about" class="btn-primary">About Me</a>
-                <a href="#contact" class="btn-secondary">Connect With Me</a>
+            <p id="typewriter-text" class="hero-element delay-3" style="color: var(--text-dim); font-size: 1.2rem; margin-bottom: 25px; line-height: 1.6; min-height: 60px; white-space: pre-line; max-width: 500px;"></p>
+            
+            <div class="btn-container hero-element delay-4">
+                <a href="#about" class="btn-primary">Explore Portfolio</a>
+                <a href="https://drive.google.com/file/d/1Q1Es4F4o4ZFTPBu9bmF4Ace4vG_3WvGn/view?usp=sharing" target="_blank" class="btn-secondary">
+                    <i class="fas fa-file-download"></i> Download CV
+                </a>
             </div>
         </div>
-        <div class="hero-image">
+        <div class="hero-image hero-element delay-5">
             <div class="image-card"><img src="images/nadaa.jpg" alt="Nada Profile"></div>
         </div>
     </section>
@@ -578,9 +681,7 @@
                 <p style="color: var(--text-dim); font-size: 1.1rem; line-height: 1.8; margin-bottom: 10px;">
                     Thank you for visiting! I am always looking for new opportunities to apply my skills to innovative projects.
                 </p>
-                <p style="font-family: 'Playfair Display', serif; font-size: 1.5rem; font-style: italic; color: var(--text-main); margin-bottom: 30px;">
-                    Let's discuss how we can work together.
-                </p>
+                <p class="contact-cta">Let's discuss how we can work together.</p>
             </div>
             
             <div class="social-links-container">
@@ -597,7 +698,7 @@
             
             <div style="margin-top: 40px; z-index: 1;">
                  <p style="font-family: 'Playfair Display', serif; font-size: 1.2rem; font-style: italic; color: var(--text-dim); margin-bottom: 5px;">Warm regards,</p>
-                 <h3 style="font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--text-main); line-height: 1.2;">Nada Fitria Berliana</h3>
+                 <h3 class="signature-text">Nada Fitria Berliana</h3>
             </div>
         </div>
     </section>
@@ -607,11 +708,32 @@
     </footer>
 
     <script>
-        // --- Cinematic Preloader ---
+        // --- PRELOADER ANIMASI PERSENTASE & LOADING BAR SINKRON ---
+        let progress = 0;
+        const percentEl = document.getElementById('loader-percent');
+        const progressEl = document.querySelector('.loader-progress');
+        
+        const interval = setInterval(() => {
+            progress += Math.floor(Math.random() * 15) + 5;
+            if(progress >= 100) {
+                progress = 100;
+                clearInterval(interval);
+            }
+            percentEl.innerText = progress + '%';
+            progressEl.style.width = progress + '%'; 
+        }, 150);
+
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.getElementById('preloader').classList.add('hide');
-            }, 1500); 
+                
+                // --- TRIGGER NAVBAR JATUH ---
+                setTimeout(() => {
+                    document.querySelector('nav').classList.add('nav-active');
+                    document.getElementById('home').classList.add('hero-loaded');
+                }, 500); 
+                
+            }, 1800); 
         });
 
         // --- Theme Toggle with Memory ---
@@ -659,7 +781,28 @@
             document.getElementById('scroll-progress').style.width = scrolled;
         });
 
-        // --- Typewriter Effect ---
+        // --- Active Menu Highlight (Scrollspy) ---
+        const sections = document.querySelectorAll("section");
+        const navLinks = document.querySelectorAll("nav ul li a");
+
+        window.addEventListener("scroll", () => {
+            let current = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove("active");
+                if (link.getAttribute("href").includes(current)) {
+                    link.classList.add("active");
+                }
+            });
+        });
+
+        // --- FIX TYPEWRITER LOMPAT (Teks disambung semua tanpa enter) ---
         const typeText = "Electrical Engineering Student at UPNVJ Exploring IoT, Research, and Digital Design.";
         const typeElement = document.getElementById('typewriter-text');
         let typeIndex = 0;
@@ -670,7 +813,7 @@
                 setTimeout(typeWriter, 40); 
             }
         }
-        setTimeout(typeWriter, 1600); 
+        setTimeout(typeWriter, 2600); // Disesuaikan sedikit nunggu nav jatuh
 
         // --- 3D Mouse Parallax (Hero Section) ---
         const heroImgContainer = document.querySelector('.hero-image');
