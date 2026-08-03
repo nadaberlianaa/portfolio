@@ -332,6 +332,82 @@
         .hero-loaded .delay-4 { animation-delay: 0.7s; }
         .hero-loaded .delay-5 { animation-delay: 0.9s; }
 
+        /* --- GLOW SPOTLIGHT --- */
+        .project-card, .achievement-card, .stat-card, .custom-reel-card, .contact-box {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::after, .achievement-card::after, .stat-card::after, .custom-reel-card::after, .contact-box::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(
+                600px circle at var(--mouse-x, -500px) var(--mouse-y, -500px), 
+                rgba(125, 95, 255, 0.15), 
+                transparent 40%
+            );
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none; 
+        }
+
+        .project-card:hover::after, .achievement-card:hover::after, .stat-card:hover::after, .custom-reel-card:hover::after, .contact-box:hover::after {
+            opacity: 1;
+        }
+        
+        .project-card > *, .achievement-card > *, .stat-card > *, .contact-box > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- ASTRA FEATURED --- */
+       .astra-featured { 
+            grid-column: 1 / -1; 
+            border: 2px solid #ffcc00; 
+            box-shadow: 0 10px 30px rgba(255, 204, 0, 0.15); 
+            background-color: #080811; 
+        }
+        .astra-bg {
+            background-position: center right;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        
+        .astra-bg::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to right, rgba(8,8,17,0.95) 0%, rgba(8,8,17,0.85) 50%, rgba(8,8,17,0) 100%);
+            z-index: 1;
+        }
+        
+        .astra-content { 
+            max-width: 60%; 
+            position: relative; 
+            z-index: 3; 
+        }
+        
+        .astra-play { 
+            top: auto;
+            left: auto;
+            bottom: 30px;
+            right: 30px;
+            transform: none;
+            background: var(--accent-primary); 
+            border-color: var(--accent-primary); 
+            z-index: 3; 
+            box-shadow: 0 5px 15px rgba(125,95,255,0.4);
+        }
+
+        @media (max-width: 768px) {
+            .astra-bg { background-position: center top; }
+            .astra-bg::after { background: linear-gradient(to top, rgba(8,8,17,1) 0%, rgba(8,8,17,0.85) 60%, rgba(8,8,17,0.2) 100%); }
+            .astra-content { max-width: 100%; }
+            .astra-play { bottom: 20px; right: 20px; }
+        }
+
         @media (hover: none) and (pointer: coarse) { .magic-cursor { display: none !important; } }
         @media (max-width: 992px) { 
             .about-container { flex-direction: column; text-align: center; } .stats-grid { flex-direction: column; } 
@@ -565,6 +641,18 @@
             </div>
 
             <div class="reels-grid">
+                <!-- FEATURED REEL: ASTRA HONDA (Winner Highlight) -->
+                <a href="https://www.instagram.com/reel/DZm2ORnT-iZ/" target="_blank" class="custom-reel-card astra-featured">
+                    <div class="reel-bg astra-bg" style="background-image: url('images/astra-reel.png');"></div>
+                    <div class="play-btn astra-play"><i class="fas fa-play"></i></div>
+                    <div class="reel-content astra-content">
+                        <span class="reel-tag" style="color: #ffcc00; font-size: 0.9rem; margin-bottom: 12px;"><i class="fas fa-crown"></i> 1st Place (Jakarta–Tangerang Regional)</span>
+                        <h4 style="font-size: 2.2rem; margin-bottom: 15px;">Astra Honda SDGs Future Leaders 2026</h4>
+                        <p style="color: rgba(255,255,255,0.8); font-size: 1rem; margin-bottom: 25px; line-height: 1.6; font-weight: 400;">Winning the Jakarta-Tangerang regional selection with impactful sustainable innovation ideas. I was fully responsible for directing and editing this campaign video.</p>
+                        <p class="watch-text" style="color: #ffcc00;">Watch on Instagram <i class="fas fa-arrow-right"></i></p>
+                    </div>
+                </a>
+
                 <a href="https://www.instagram.com/reel/DYKOTM8xZqu/" target="_blank" class="custom-reel-card">
                     <div class="reel-bg" style="background: linear-gradient(to bottom, rgba(125,95,255,0.2), rgba(8,8,17,0.9)), url('images/sneakpeek.png') center/cover;"></div>
                     <div class="play-btn"><i class="fas fa-play"></i></div>
@@ -601,6 +689,16 @@
     <section id="achievements" class="reveal">
         <h2 class="section-title">Achievements</h2>
         <div class="achievement-grid">
+            <div class="achievement-card">
+                <i class="fas fa-globe watermark"></i>
+                <div class="achieve-title"><i class="fas fa-award"></i> 1st Place (Jakarta-Tangerang Regional)</div>
+                <div class="achieve-org">Astra Honda SDGs Future Leaders | 2026</div>
+                <ul class="achieve-list">
+                    <li>Secured 1st place in the regional selection with the "KARSA" (Kopi Adaptif Seluma Bersama Astra) team project.</li>
+                    <li>Developed a smart hybrid drying system to preserve the economic value of coffee in Desa Talang Empat amidst the climate crisis.</li>
+                    <li>Officially featured on the <a href="https://ft.upnvj.ac.id/2026/07/02/tim-karsa-ksm-iot-ft-upnvj-raih-juara-1-regional-astra-honda-sdgs-future-leaders-2026/" target="_blank" style="color: var(--accent-secondary); text-decoration: none; font-weight: 700; border-bottom: 1px dashed var(--accent-secondary); transition: 0.3s;">Faculty of Engineering UPNVJ News Publication <i class="fas fa-external-link-alt" style="font-size: 0.7rem; margin-left: 3px;"></i></a>.</li>
+                </ul>
+            </div>
             <div class="achievement-card">
                 <i class="fas fa-trophy watermark"></i>
                 <div class="achieve-title"><i class="fas fa-award"></i> 1st Place in Popular Scientific Essay Competition</div>
@@ -900,6 +998,20 @@
             });
             btn.addEventListener('mouseleave', () => {
                 btn.style.transform = `translate(0px, 0px) scale(1)`;
+            });
+        });
+
+        // --- GLOW SPOTLIGHT TRACKING ---
+        const glowCards = document.querySelectorAll('.project-card, .achievement-card, .stat-card, .custom-reel-card, .contact-box');
+        
+        glowCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
             });
         });
 
