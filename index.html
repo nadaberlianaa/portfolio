@@ -10,47 +10,42 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
     <style>
-        :root {
-            --bg-color: #080811; 
-            --glow-primary: rgba(125, 95, 255, 0.18); 
-            --glow-secondary: rgba(69, 170, 242, 0.12); 
-            --card-bg: rgba(17, 17, 29, 0.6);
-            --text-main: #ffffff;
-            --text-dim: #a0a0b0;
-            --accent-primary: #7d5fff;
-            --accent-secondary: #45aaf2;
-            --nav-bg: rgba(8, 8, 17, 0.7);
-            --border-color: rgba(255, 255, 255, 0.1);
-            --gradient: linear-gradient(135deg, #7d5fff 0%, #45aaf2 100%);
+       :root {
+            --bg-color: #050505; 
+            --card-bg: transparent; 
+            --text-main: #f4f4f5;
+            --text-dim: #8a8a93;
+            --accent-primary: #ffffff; 
+            --accent-secondary: #555555;
+            --nav-bg: rgba(5, 5, 5, 0.85);
+            --border-color: rgba(255, 255, 255, 0.08); 
+            --gradient: #ffffff;
+            --btn-text: #050505; 
         }
 
         .light-mode {
-            --bg-color: #f5f5f7;
-            --glow-primary: rgba(125, 95, 255, 0.08);
-            --glow-secondary: rgba(69, 170, 242, 0.05);
-            --card-bg: rgba(255, 255, 255, 0.8);
-            --text-main: #1d1d1f;
-            --text-dim: #6e6e73;
-            --accent-primary: #5e35b1;
-            --accent-secondary: #0071e3;
-            --nav-bg: rgba(245, 245, 247, 0.8);
-            --border-color: rgba(0, 0, 0, 0.1);
-            --gradient: linear-gradient(135deg, #5e35b1 0%, #0071e3 100%);
+            --bg-color: #fcfcfc; 
+            --card-bg: transparent; 
+            --text-main: #111111; 
+            --text-dim: #666666; 
+            --accent-primary: #000000; 
+            --accent-secondary: #444444; 
+            --nav-bg: rgba(252, 252, 252, 0.85);
+            --border-color: rgba(0, 0, 0, 0.08);
+            --gradient: #111111;
+            --btn-text: #ffffff;
+        }
+
+        .btn-primary, #theme-toggle {
+            color: var(--btn-text) !important;
         }
 
         ::selection { background: var(--accent-primary); color: white; }
         ::-moz-selection { background: var(--accent-primary); color: white; }
 
-        html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+        html { scroll-padding-top: 70px; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background-color: var(--bg-color); color: var(--text-main); overflow-x: hidden; transition: 0.4s; }
-        
-        body::before {
-            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 85% 15%, var(--glow-primary), transparent 45%),
-                        radial-gradient(circle at 15% 85%, var(--glow-secondary), transparent 45%);
-            z-index: -1; pointer-events: none;
-        }
 
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: transparent; }
@@ -63,13 +58,6 @@
             box-shadow: 0 0 10px var(--accent-primary);
         }
 
-        @keyframes pulseGlow {
-            0% { opacity: 0.5; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.1); }
-            100% { opacity: 0.5; transform: scale(1); }
-        }
-        body::before { animation: pulseGlow 10s infinite alternate ease-in-out; }
-
         @media (pointer: fine) { body, a, button { cursor: none; } }
 
         .magic-cursor {
@@ -80,6 +68,67 @@
         .magic-cursor.hovered { width: 60px; height: 60px; }
         .magic-cursor.no-invert { mix-blend-mode: normal; background-color: rgba(125, 95, 255, 0.4); border: 1px solid var(--accent-primary); }
         .magic-cursor.hidden-cursor { opacity: 0 !important; transition: opacity 0s !important; }
+
+        .highlight {
+            background: none !important;
+            -webkit-text-fill-color: var(--text-main) !important;
+            color: var(--text-main) !important;
+            text-shadow: none !important;
+        }
+
+        .btn-primary { 
+            background: var(--text-main) !important; 
+            color: var(--bg-color) !important; /* Teks tombol selalu kebalikan background */
+            border: 1px solid var(--text-main) !important;
+        }
+        .btn-primary:hover {
+            background: transparent !important;
+            color: var(--text-main) !important;
+            box-shadow: none !important;
+        }
+
+        #theme-toggle {
+            background: var(--text-main) !important;
+            color: var(--bg-color) !important;
+        }
+
+        .loader-percent { color: var(--text-main) !important; }
+        .loader-progress { background: var(--text-main) !important; }
+
+        ::-webkit-scrollbar-thumb { background: var(--text-dim) !important; }
+        .magic-cursor.no-invert {
+            background-color: rgba(128, 128, 128, 0.2) !important;
+            border-color: var(--text-main) !important;
+            backdrop-filter: blur(2px);
+        }
+
+        .badge { color: var(--text-main) !important; border-color: var(--border-color) !important; background: transparent !important;}
+        .contact-cta { background: none !important; -webkit-text-fill-color: var(--text-main) !important; }
+        .social-link-editorial::before { background: var(--text-main) !important; }
+        .social-link-editorial:hover { color: var(--bg-color) !important; }
+        .social-link-editorial:hover i { color: var(--bg-color) !important; }
+
+        #back-to-top, .play-btn {
+            background: var(--text-main) !important;
+            color: var(--bg-color) !important; 
+            border: 1px solid var(--text-main) !important;
+        }
+
+        #back-to-top i, .play-btn i {
+            color: var(--bg-color) !important;
+        }
+
+        #back-to-top:hover, .custom-reel-card:hover .play-btn {
+            background: transparent !important;
+        }
+        #back-to-top:hover i, .custom-reel-card:hover .play-btn i {
+            color: var(--text-main) !important;
+        }
+
+        #contact > div:first-child > div {
+            color: var(--bg-color) !important; /* Memaksa teks jadi warna kontras */
+            box-shadow: 4px 4px 0px var(--text-dim) !important; /* Menyamarkan bayangan kotaknya biar elegan */
+        }
 
         /* --- Loading Preloader */
         #preloader { 
@@ -158,10 +207,7 @@
         #theme-toggle { background: var(--gradient); border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; color: white; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
 
         section { padding: 60px 10%; }
-        .section-title { font-size: 2.5rem; margin-bottom: 30px; font-weight: 800; letter-spacing: -1px; }
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-
+        .section-title { font-size: clamp(2rem, 4vw, 3.5rem); margin-bottom: 30px; font-weight: 800; letter-spacing: -1.5px; text-transform: uppercase; }
         .hero { height: 100vh; display: flex; align-items: center; justify-content: space-around; }
         .hero-content { width: 100%; max-width: 750px; } 
         
@@ -319,19 +365,6 @@
             color: var(--text-dim); font-size: 0.9rem; margin-top: 50px; 
         }
 
-        /* --- Animasi Fade Up Hero --- */
-        @keyframes fadeUpEntrance {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .hero-element { opacity: 0; } 
-        .hero-loaded .hero-element { animation: fadeUpEntrance 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
-        .hero-loaded .delay-1 { animation-delay: 0.1s; }
-        .hero-loaded .delay-2 { animation-delay: 0.3s; }
-        .hero-loaded .delay-3 { animation-delay: 0.5s; }
-        .hero-loaded .delay-4 { animation-delay: 0.7s; }
-        .hero-loaded .delay-5 { animation-delay: 0.9s; }
-
         /* --- GLOW SPOTLIGHT --- */
         .project-card, .achievement-card, .stat-card, .custom-reel-card, .contact-box {
             position: relative;
@@ -425,8 +458,7 @@
             section { padding: 100px 5% 40px; }
             .hero { height: auto; padding-top: 140px; text-align: center; } 
             .hero-content { display: flex; flex-direction: column; align-items: center; }
-            .hero h1 { flex-direction: column; gap: 5px; font-size: 2.4rem !important; justify-content: center; text-align: center; }
-            
+            .hero h1 { flex-direction: column; gap: 0px; font-size: 3.5rem !important; justify-content: center; text-align: center; line-height: 1; letter-spacing: -2px;}
             .btn-container { flex-direction: column; width: 100%; gap: 15px; } .btn-primary, .btn-secondary { width: 100%; text-align: center; }
             .project-grid { grid-template-columns: 1fr; } .big-gallery-frame { padding: 20px; border-radius: 25px; }
             .masonry-grid { column-count: 2; column-gap: 10px; } .gallery-item { margin-bottom: 10px; border-radius: 10px; }
@@ -443,6 +475,118 @@
             .contact-box { padding: 40px 20px; } .social-links-container { flex-direction: column; width: 100%; align-items: center;}
             .social-link-editorial { width: 100%; justify-content: center; max-width: 300px;}
             #scroll-progress { height: 3px; } #back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
+        }
+        .project-card, .achievement-card, .stat-card, .custom-reel-card, .contact-box, .big-gallery-frame, .cinematic-wrapper, .social-link-editorial {
+            border: none !important;
+            box-shadow: none !important;
+            background: transparent !important;
+        }
+        .about-frame { display: none !important; }
+        .project-card { padding: 0 !important; }
+        .proj-info { padding: 25px 0 !important; }
+        section { padding: 120px 10% !important; }
+        .big-gallery-frame { padding: 0 !important; backdrop-filter: none !important; }
+        .gallery-item { border: none !important; }
+        .stats-grid { gap: 30px !important; }
+        .stat-card {
+            align-items: flex-start !important;
+            text-align: left !important;
+            padding: 20px 0 0 0 !important; 
+            border-top: 1px solid var(--border-color) !important; 
+            border-radius: 0 !important;
+        }
+        .stat-card i { 
+            font-size: 2rem !important; 
+            margin-bottom: 20px !important; 
+            color: var(--text-main) !important; 
+        }
+        .stat-card h3 { 
+            font-size: 1.1rem !important; 
+            font-weight: 800 !important; 
+            text-transform: uppercase;
+        }
+        .achievement-grid { gap: 40px !important; }
+        .achievement-card {
+            padding: 30px 0 !important;
+            border-top: 1px solid var(--border-color) !important; 
+            border-radius: 0 !important;
+        }
+        .achieve-title { 
+            font-size: 1.5rem !important; 
+            margin-bottom: 8px !important; 
+            letter-spacing: -0.5px !important; 
+        }
+        .achieve-org { 
+            font-size: 1rem !important; 
+            margin-bottom: 20px !important; 
+            color: var(--text-dim) !important; 
+            font-weight: 400 !important;
+        }
+        .achievement-card i.watermark { 
+            right: 0 !important; 
+            bottom: 10px !important; 
+            font-size: 8rem !important; 
+            opacity: 0.03 !important; 
+        }
+        html { scroll-padding-top: 140px !important; }
+        .stat-card h3 { 
+            font-size: 0.85rem !important; 
+            letter-spacing: 0.5px !important;
+            word-wrap: break-word;
+        }
+        .stat-card p {
+            font-size: 0.8rem !important;
+        }
+        .achieve-title { 
+            font-size: 1.6rem !important; 
+            line-height: 1.3 !important;
+            margin-bottom: 10px !important;
+        }
+        .achieve-org { 
+            font-size: 1.05rem !important; 
+            margin-bottom: 25px !important; 
+        }
+        .achieve-list li { 
+            font-size: 1.05rem !important; 
+            color: var(--text-main) !important; 
+            opacity: 0.85 !important; 
+            line-height: 1.7 !important; 
+            margin-bottom: 12px !important; 
+        }
+        .timeline { border-left: 1px solid var(--border-color) !important; }
+        .timeline-item::before { 
+            background: var(--text-main) !important; 
+            border-color: var(--bg-color) !important; 
+        }
+        .timeline-item h3 { font-size: 1.4rem !important; margin-bottom: 8px; }
+        .timeline-item p { font-size: 1.05rem !important; line-height: 1.7; opacity: 0.85; }
+        .proj-img {
+            border-radius: 24px !important; 
+            margin-bottom: 20px !important;
+        }
+        .proj-info {
+            padding: 25px 0 0 0 !important;
+            border-top: 1px solid var(--border-color) !important;
+        }
+        .project-card h3 {
+            font-size: 1.6rem !important;
+            margin-bottom: 12px !important;
+            letter-spacing: -0.5px !important;
+        }
+        .project-card p {
+            font-size: 1.05rem !important;
+            line-height: 1.6 !important;
+            opacity: 0.85 !important;
+        }
+        section { 
+            padding: 80px 10% 40px !important; 
+        }
+        .project-card {
+            overflow: visible !important;
+            height: auto !important;
+        }
+        .proj-info {
+            padding-bottom: 10px !important;
         }
     </style>
 </head>
@@ -831,7 +975,13 @@
     <footer>
         <p>&copy; 2026 Nada Fitria Berliana. Built with <i class="fas fa-lightbulb" style="color: var(--accent-secondary);"></i> & <i class="fas fa-coffee" style="color: var(--accent-primary);"></i></p>
     </footer>
-
+   
+    <!-- Library Lenis -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    
+    <!-- Library GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script>
         // --- PRELOADER ANIMASI PERSENTASE & LOADING BAR SINKRON ---
         let progress = 0;
@@ -886,18 +1036,6 @@
             }
         });
         
-        // --- Scroll Reveal ---
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < windowHeight - 80) { reveals[i].classList.add("active"); }
-            }
-        }
-        window.addEventListener("scroll", reveal);
-        reveal();
-
         // --- Scroll Progress Bar ---
         window.addEventListener('scroll', () => {
             const scrollPx = document.documentElement.scrollTop;
@@ -1086,6 +1224,64 @@
         }
         greetingElement.innerText = greetingText;
 
+        const lenis = new Lenis({
+            duration: 1.2, 
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+            direction: 'vertical', 
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false, 
+            touchMultiplier: 2,
+            infinite: false,
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        document.querySelectorAll('nav ul li a, .btn-primary').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if(targetId.startsWith('#')) {
+                    e.preventDefault();
+                    lenis.scrollTo(targetId, {
+                        offset: -50, 
+                        duration: 1.5
+                    });
+                }
+            });
+        });
+
+        // ==========================================
+        // --- GSAP & SCROLLTRIGGER ANIMATION ---
+        // ==========================================
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 1. Animasi Sinematik Hero Section
+        const heroTl = gsap.timeline({ delay: 1.5 }); 
+        heroTl.from(".hero-intro p", { y: 30, opacity: 0, duration: 1, ease: "power4.out" })
+              .from(".hero h1", { y: 50, opacity: 0, duration: 1, ease: "power4.out" }, "-=0.7") // Sekarang animasi menembak ke bungkus H1, bukan ke span-nya
+              .from(".badge", { scale: 0.8, opacity: 0, duration: 0.8, ease: "back.out(1.7)" }, "-=0.5")
+              .from(".btn-container", { y: 20, opacity: 0, duration: 0.8, ease: "power3.out" }, "-=0.5")
+              .from(".hero-image", { y: 40, opacity: 0, duration: 1.5, ease: "power4.out" }, "-=1.2"); // Sekarang animasi menembak wrapper luar, bukan ke kartunya langsung
+
+        // 2. Animasi Fade-Up Section
+        gsap.utils.toArray('section:not(.hero)').forEach(section => {
+            gsap.from(section, {
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top 85%", 
+                    toggleActions: "play none none reverse" 
+                },
+                y: 60,
+                opacity: 0,
+                duration: 1.2,
+                ease: "power3.out"
+            });
+        });
     </script>
 </body>
 </html>
