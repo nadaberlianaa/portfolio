@@ -588,6 +588,111 @@
         .proj-info {
             padding-bottom: 10px !important;
         }
+        .cinematic-wrapper::before { display: none !important; }
+        .reels-header { 
+            margin-bottom: 30px !important; 
+            text-align: center !important; 
+        }
+        .reels-header h3 {
+            background: transparent !important;
+            border: none !important;
+            backdrop-filter: none !important;
+            padding: 0 !important;
+            font-size: 2rem !important;
+            letter-spacing: -1px !important;
+        }
+        @media (max-width: 768px) {
+            nav ul {
+                flex-wrap: wrap !important;
+                justify-content: center !important;
+                overflow-x: visible !important;
+                gap: 8px !important;
+            }
+            nav ul li a {
+                padding: 6px 12px !important;
+                font-size: 0.8rem !important;
+                border: 1px solid var(--border-color); 
+                border-radius: 20px;
+            }
+            nav { 
+                padding: 15px !important; 
+                border-radius: 25px !important; 
+            }
+        .section-title {
+                font-size: 2.2rem !important; 
+                line-height: 1.1 !important;
+                margin-bottom: 25px !important;
+                word-wrap: break-word;
+            }
+            .astra-content h4 {
+                font-size: 1.8rem !important;
+                line-height: 1.2 !important;
+            }
+        }
+        @media (max-width: 768px) {
+            nav { 
+                padding: 10px 15px !important; 
+                border-radius: 30px !important; 
+                width: 92% !important;
+            }
+            nav ul {
+                flex-wrap: nowrap !important;
+                justify-content: flex-start !important;
+                overflow-x: auto !important; 
+                padding-bottom: 5px !important; 
+                gap: 10px !important;
+                -webkit-overflow-scrolling: touch; 
+            }
+            nav ul::-webkit-scrollbar {
+                display: none !important;
+            }
+            nav ul li {
+                flex-shrink: 0 !important; 
+            }
+            nav ul li a {
+                padding: 6px 14px !important;
+                font-size: 0.85rem !important;
+                border: 1px solid var(--border-color) !important;
+            }
+        }
+        @media (max-width: 768px) {
+            nav::after {
+                content: '';
+                position: absolute;
+                right: 0;
+                top: 0;
+                height: 100%;
+                width: 45px;
+                background: linear-gradient(to left, var(--nav-bg) 10%, transparent);
+                pointer-events: none; 
+                border-radius: 0 30px 30px 0;
+            }
+            nav ul { 
+                padding-right: 40px !important; 
+            }
+            .reels-header h3 {
+                font-size: 1.25rem !important;
+                display: flex !important;
+                flex-direction: row !important; 
+                align-items: center !important;
+                justify-content: center !important;
+                gap: 8px !important;
+                margin-bottom: 0 !important;
+                white-space: nowrap !important;
+            }
+            .video-showcase {
+                gap: 15px !important; 
+                padding-top: 0 !important;
+            }
+        }
+        @media (max-width: 768px) {
+            nav::after { 
+                display: none !important; 
+            }
+            nav ul { 
+                padding-right: 15px !important; 
+            }
+        }
     </style>
 </head>
 <body>
@@ -1052,20 +1157,32 @@
             let current = "";
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 200) {
+                if (window.scrollY >= sectionTop - 300) { 
                     current = section.getAttribute("id");
                 }
             });
 
             navLinks.forEach(link => {
-                link.classList.remove("active");
-                if (link.getAttribute("href").includes(current)) {
-                    link.classList.add("active");
+                const isMatch = current && link.getAttribute("href").includes(current);
+                
+                if (isMatch) {
+                    if (!link.classList.contains("active")) {
+                        link.classList.add("active");
+                        if (window.innerWidth <= 768) {
+                            link.scrollIntoView({ 
+                                behavior: "smooth", 
+                                inline: "center",
+                                block: "nearest" 
+                            });
+                        }
+                    }
+                } else {
+                    link.classList.remove("active");
                 }
             });
         });
 
-        // --- FIX TYPEWRITER LOMPAT (Teks disambung semua tanpa enter) ---
+        // --- FIX TYPEWRITER ---
         const typeText = "Electrical Engineering Student at UPNVJ Exploring IoT, Research, and Digital Design.";
         const typeElement = document.getElementById('typewriter-text');
         let typeIndex = 0;
