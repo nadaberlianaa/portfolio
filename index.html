@@ -693,6 +693,18 @@
                 padding-right: 15px !important; 
             }
         }
+        .local-video-container video {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            outline: none;
+            border: 1px solid var(--border-color);
+            background: #000;
+        }
+        @media (max-width: 768px) {
+            .video-caption h3 { font-size: 1.3rem !important; }
+            .video-caption p { font-size: 0.9rem !important; }
+        }
     </style>
 </head>
 <body>
@@ -903,6 +915,20 @@
             <div class="cinematic-wrapper iframe-zone">
                 <div class="yt-container">
                     <iframe src="https://www.youtube.com/embed/mP45tp8aHxQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <div class="cinematic-wrapper"> 
+                <div class="local-video-container">
+                    <video id="ospekVideo" controls controlsList="nodownload" preload="metadata" muted playsinline loop>
+                        <source src="videos/opening-1.mp4" type="video/mp4">
+                        Browser Anda tidak mendukung tag video.
+                    </video>
+                </div>
+                <!-- Teks Elegan di Bawah Video PATRIBERA -->
+                <div class="video-caption" style="text-align: center; margin-top: 20px;">
+                    <h3 style="color: var(--accent-primary); font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 5px;">PATRIBERA 2026: Grand Opening Ceremony</h3>
+                    <p style="color: var(--text-dim); font-size: 1.05rem; font-weight: 400;">The official cinematic video premiered during the grand opening ceremony of the university's student orientation program.</p>
                 </div>
             </div>
 
@@ -1399,6 +1425,25 @@
                 ease: "power3.out"
             });
         });
+        const localVideo = document.getElementById('ospekVideo');
+        
+        if (localVideo) {
+            const videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        localVideo.play().catch(error => {
+                            console.log("Autoplay diblokir browser:", error);
+                        });
+                    } else {
+                        localVideo.pause();
+                    }
+                });
+            }, { 
+                threshold: 0.5 
+            });
+
+            videoObserver.observe(localVideo);
+        }
     </script>
 </body>
 </html>
