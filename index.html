@@ -53,9 +53,9 @@
             
             <div class="btn-container hero-element delay-4">
                 <a href="#about" class="btn-primary">Explore Portfolio</a>
-                <a href="https://drive.google.com/file/d/1mT7g9HHGq4cgZaF5E79gEpWeoMWFj968/view?usp=sharing" target="_blank" class="btn-secondary">
-                    <i class="fas fa-file-download"></i> Download CV
-                </a>
+                <button type="button" id="open-cv-btn" class="btn-secondary" onclick="openCv()">
+                    <i class="fas fa-file-download"></i> View CV
+                </button>
             </div>
         </div>
         <div class="hero-image hero-element delay-5">
@@ -389,9 +389,20 @@
             </div>
             
             <div class="social-links-container">
-                <a href="mailto:nadaftrberliana@gmail.com" class="social-link-editorial">
-                    <i class="fas fa-envelope"></i> Email
-                </a>
+                <div class="email-dropdown-wrapper">
+                    <button type="button" id="email-dropdown-btn" class="social-link-editorial" onclick="toggleEmailDropdown(event)">
+                        <i class="fas fa-envelope"></i> <span id="email-main-text">Email</span> <i class="fas fa-chevron-down" style="font-size: 0.75rem; margin-left: 4px;"></i>
+                    </button>
+                
+                    <div id="email-dropdown-menu" class="email-dropdown-menu">
+                        <a href="mailto:nadaftrberliana@gmail.com" class="dropdown-item">
+                            <i class="fas fa-paper-plane"></i> Send Direct Email
+                        </a>
+                        <button type="button" id="copy-email-action" class="dropdown-item" onclick="copyEmailAddress(event)">
+                            <i class="fas fa-copy"></i> <span id="copy-action-text">Copy Address</span>
+                        </button>
+                    </div>
+                </div>
                 <a href="https://linkedin.com/in/nadafitriaberliana/" target="_blank" class="social-link-editorial">
                     <i class="fab fa-linkedin"></i> LinkedIn
                 </a>
@@ -415,5 +426,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
+
+<div id="cv-modal" class="cv-modal-overlay">
+        <div class="cv-modal-content">
+            <div class="cv-modal-header">
+                <h3><i class="fas fa-file-alt"></i> Curriculum Vitae — Nada Fitria Berliana</h3>
+                <div class="cv-modal-actions">
+                    <a href="https://drive.google.com/file/d/1hcMKPAWh9nj3--SNf_jjIxvN5PEFnJxk/view?usp=sharing" target="_blank" class="cv-download-direct" title="Open in Drive / Download">
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    <button type="button" id="close-cv-modal" class="cv-close-btn" onclick="closeCv()">&times;</button>
+                </div>
+            </div>
+            <div class="cv-modal-body">
+                <iframe src="docs/cv-nada.pdf"></iframe>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
