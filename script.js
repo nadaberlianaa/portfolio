@@ -5,6 +5,7 @@ function toggleEmailDropdown(e) {
         menu.classList.toggle('show');
     }
 }
+
 function copyEmailAddress(e) {
     if (e) e.stopPropagation();
     const email = 'nadaftrberliana@gmail.com';
@@ -19,6 +20,7 @@ function copyEmailAddress(e) {
         }, 1500);
     });
 }
+
 document.addEventListener('click', (e) => {
     const btn = document.getElementById('email-dropdown-btn');
     const menu = document.getElementById('email-dropdown-menu');
@@ -26,6 +28,7 @@ document.addEventListener('click', (e) => {
         menu.classList.remove('show');
     }
 });
+
 function openCv() {
     const cvModal = document.getElementById('cv-modal');
     if (cvModal) {
@@ -165,6 +168,12 @@ if (cursor) {
         el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
         el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
     });
+
+    const mediaEls = document.querySelectorAll('img, video, .custom-reel-card, .cinematic-wrapper');
+    mediaEls.forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('no-invert'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('no-invert'));
+    });
 }
 
 const greetingElement = document.getElementById('greeting');
@@ -185,24 +194,6 @@ if (backToTop) {
     });
     backToTop.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-}
-
-const copyEmailBtn = document.getElementById('copy-email-btn');
-const emailBtnText = document.getElementById('email-btn-text');
-
-if (copyEmailBtn) {
-    copyEmailBtn.addEventListener('click', () => {
-        const email = 'nadaftrberliana@gmail.com';
-        navigator.clipboard.writeText(email).then(() => {
-            if (emailBtnText) emailBtnText.innerText = 'Copied to Clipboard! ✨';
-            copyEmailBtn.style.borderColor = 'var(--text-main)';
-            
-            setTimeout(() => {
-                if (emailBtnText) emailBtnText.innerText = 'Email';
-                copyEmailBtn.style.borderColor = '';
-            }, 2500);
-        });
     });
 }
 
@@ -245,6 +236,7 @@ if (typeof Lenis !== 'undefined') {
 
 if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
+
     gsap.utils.toArray('section:not(.hero)').forEach(section => {
         gsap.from(section, {
             scrollTrigger: {
@@ -258,4 +250,60 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
             ease: "power3.out"
         });
     });
+
+    gsap.fromTo('.text-idea', 
+        { y: 50, opacity: 0 },
+        {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            ease: "back.out(1.7)",
+            scrollTrigger: {
+                trigger: '#contact',
+                start: 'top 75%',
+                toggleActions: 'restart none none reverse'
+            }
+        }
+    );
+
+    gsap.fromTo('.floating-pill', 
+        { scale: 0.5, opacity: 0 },
+        {
+            scale: 1,
+            opacity: 1,
+            duration: 0.7,
+            stagger: 0.1,
+            ease: "back.out(2)",
+            scrollTrigger: {
+                trigger: '#contact',
+                start: 'top 75%',
+                toggleActions: 'restart none none reverse'
+            }
+        }
+    );
 }
+
+document.addEventListener('mousemove', (e) => {
+    const pills = document.querySelectorAll('.floating-pill');
+    if (pills.length === 0) return;
+
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+
+    pills.forEach(pill => {
+        const speed = parseFloat(pill.getAttribute('data-speed')) || 1;
+        const x = (mouseX - windowWidth / 2) * (speed / 90);
+        const y = (mouseY - windowHeight / 2) * (speed / 90);
+
+        if (typeof gsap !== 'undefined') {
+            gsap.to(pill, {
+                x: x,
+                y: y,
+                duration: 0.8,
+                ease: "power2.out"
+            });
+        }
+    });
+});
