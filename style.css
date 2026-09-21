@@ -422,8 +422,133 @@ footer { text-align: center; padding: 15px 20px; border-top: 1px solid var(--bor
     .landscape-video-grid { grid-template-columns: 1fr; gap: 35px; }
 }
 @media (max-width: 768px) {
-    .floating-pill { display: none; }
-    nav { padding: 10px 15px; border-radius: 30px; width: 92%; }
-    nav ul { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; gap: 10px; }
-    section { padding: 80px 5% 30px; }
+    html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+    }
+    .hero {
+        height: auto !important;
+        min-height: 100vh !important;
+        padding-top: 130px !important;
+        padding-bottom: 50px !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        text-align: center !important;
+    }
+    .hero-content {
+        width: 100% !important;
+        max-width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+    .hero-image {
+        display: none !important;
+    }
+    .hero h1 {
+        font-size: 2.8rem !important;
+        line-height: 1.15 !important;
+        margin-bottom: 20px !important;
+        text-align: center !important;
+    }
+    .btn-container {
+        flex-direction: column !important;
+        width: 100% !important;
+        max-width: 280px !important;
+        gap: 12px !important;
+        margin: 0 auto !important;
+    }
+    .btn-primary, .btn-secondary {
+        width: 100% !important;
+        text-align: center !important;
+        justify-content: center !important;
+    }
+    nav {
+        width: 92% !important;
+        top: 15px !important;
+        padding: 8px 12px !important;
+    }
+}
+@media (max-width: 768px) {
+    html, body {
+        overflow-x: hidden !important;
+        width: 100% !important;
+    }
+    .floating-pill {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 140px !important;       
+        height: 32px !important;      
+        padding: 0 8px !important;
+        font-size: 0.7rem !important;
+        border-radius: 20px !important;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.3) !important;
+        white-space: nowrap !important;
+    }
+    .floating-pill i {
+        font-size: 0.75rem !important;
+        margin-right: 4px !important;
+    }
+    .spatial-hero-wrapper {
+        padding: 35px 0 25px 0 !important;
+    }
+    .pill-1 { 
+        top: 0px !important; 
+        left: 2px !important; 
+        width: auto !important;        
+        min-width: 155px !important;    
+        padding: 0 10px !important;     
+        transform: rotate(-5deg) scale(0.8) !important; 
+    }
+    .pill-2 { 
+        top: 0px !important; 
+        right: 5px !important; 
+        transform: rotate(5deg) scale(0.85) !important; 
+    }
+    .pill-3 { 
+        top: auto !important;
+        bottom: -3px !important; 
+        left: 5px !important; 
+        margin-bottom: -15px !important; 
+        transform: rotate(4deg) scale(0.85) !important; 
+    }
+    .pill-4 { 
+        top: auto !important;
+        bottom: -3px !important; 
+        right: 5px !important; 
+        margin-bottom: -15px !important; 
+        transform: rotate(-4deg) scale(0.85) !important; 
+    }
+    .spatial-headline {
+        font-size: 2.2rem !important;
+        gap: 8px !important;
+    }
+    .spatial-subheadline {
+        font-size: 1rem !important;
+    }
+    .reels-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+    }
+    .custom-reel-card {
+        height: 420px !important;
+        width: 100% !important;
+        border-radius: 20px !important;
+    }
+    .reel-content {
+        padding: 20px 18px !important;
+    }
+    .reel-content h4 {
+        font-size: 1.1rem !important;
+        line-height: 1.3 !important;
+    }
+    .tools-logo-container {
+        justify-content: center !important;
+        gap: 12px !important;
+    }
+    .tool-icon {
+        width: 32px !important;
+        height: 32px !important;
+    }
 }
